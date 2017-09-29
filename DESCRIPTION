@@ -10,7 +10,7 @@ Author:
 		Chris Beadles <cbeadles@rti.org> (res),
 		Yiyan (Echo) Liu <yliu@rti.org> (res),
 		Ann Larson <alarsen@rti.org> (res)
-Maintainer: Rob Chew <rchew@rti.org>, Kasey Jones <krjones@rti.org>
+Maintainer: Rob Chew <rchew@rti.org>
 Description: Functions to perform propensity score matching on rolling entry interventions for which a suitable "entry" date is not observed for nonparticipants.
 License: MIT + file LICENSE
 Depends:

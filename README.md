@@ -21,6 +21,9 @@ devtools::install_github("RTIInternational/rollmatch")
 ### Usage
 
 ```r
+# Load rollmatch
+library(rollmatch)
+
 # Load sample dataset
 data(package="rollmatch", "rem_synthdata_small")
 

@@ -1,5 +1,5 @@
 ^README\.md$
-^\data-raw$
+^data-raw$
 ^tests/.DS_Store
 ^tests/testthat/.DS_Store
 ^.DS_Store
