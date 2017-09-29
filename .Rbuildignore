@@ -1,7 +1,9 @@
 ^README\.md$
 ^\data-raw$
 ^tests/.DS_Store
+^tests/testthat/.DS_Store
 ^.DS_Store
 ^cran-comments\.md$
 ^man/figures
 ^.gitignore
+^.git
