@@ -4,3 +4,4 @@
 ^.DS_Store
 ^cran-comments\.md$
 ^man/figures
+^.gitignore
