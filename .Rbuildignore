@@ -1,0 +1,5 @@
+^README\.md$
+^\data-raw$
+^tests/.DS_Store
+^.DS_Store
+^cran-comments\.md$
