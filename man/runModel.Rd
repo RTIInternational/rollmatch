@@ -13,7 +13,7 @@ regression ("probit") to estimate the predicted probability of participating}
 \item{match_on}{Match on estimated propensity score ("pscore") or logit of
 estimated propensity score ("logit").}
 
-\item{reduced_data}{Dataframe of reduced treament and comparison data}
+\item{reduced_data}{Dataframe of reduced treatment and comparison data}
 
 \item{id}{ID variable in dataset}
 

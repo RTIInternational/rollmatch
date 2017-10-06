@@ -36,7 +36,7 @@
 #' @param id The individual id variable.
 #' @param lookback The number of time periods to look back before the
 #' time period of enrollment (1-10).
-#' @param caliper The pre-specified distance whithin which to allow matching.
+#' @param caliper The pre-specified distance within which to allow matching.
 #' The caliper width is calculated as the \code{caliper} multiplied by the
 #' pooled standard deviation of the propensity scores or the logit of the
 #' propensity scores - depending on the value of \code{match_on}.

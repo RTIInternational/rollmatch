@@ -30,7 +30,7 @@ chr_2_factor <- function(df, vars){
 #' regression ("probit") to estimate the predicted probability of participating
 #' @param match_on Match on estimated propensity score ("pscore") or logit of
 #' estimated propensity score ("logit").
-#' @param reduced_data Dataframe of reduced treament and comparison data
+#' @param reduced_data Dataframe of reduced treatment and comparison data
 #' @param id ID variable in dataset
 #' @param treat Treatment variable in dataset
 #' @param entry Entry quarter variable in dataset
@@ -106,7 +106,7 @@ createComparison <- function(lr_result, tm, entry, id){
   return(comparison_pool)
 }
 
-#' Caliper to trim the comparison data to only observations within threshhold
+#' Caliper to trim the comparison data to only observations within threshold
 #'
 #' @param caliper The pre-specified distance whithin which to allow matching.
 #' The caliper width is calculated as the \code{caliper} multiplied by the
@@ -154,8 +154,8 @@ trimPool <- function(caliper, data_pool,lr_result,
 #'
 #' @param comparison_pool Dataframe containing the pool from which matches
 #' should be found
-#' @param num_matches Integer. the number of comparison beneficary matches to
-#' attemptto assign to each treatment beneficiary
+#' @param num_matches Integer. the number of comparison beneficiary matches to
+#' attempt to assign to each treatment beneficiary
 #' @param replacement Boolean. Assign comparison beneficiaries with replacement
 #' (TRUE) or without replacement (FALSE). If \code{replacement} is TRUE, then
 #' comparison beneficiaries will be allowed to be used with replacement within
@@ -349,7 +349,7 @@ createWeights <- function(matches, data, id){
 #' @param orig.call The original call of the main function
 #' @param formula Original formula used
 #' @param tm The time period indicator.
-#' @param entry The time period in which the paricipant enrolled in the
+#' @param entry The time period in which the participant enrolled in the
 #' intervention (in the same units as the tm variable).
 #' @param lookback The number of time periods to look back before the
 #' time period of enrollment (1-10).

@@ -24,7 +24,7 @@ control weights}
 
 \item{tm}{The time period indicator.}
 
-\item{entry}{The time period in which the paricipant enrolled in the
+\item{entry}{The time period in which the participant enrolled in the
 intervention (in the same units as the tm variable).}
 
 \item{lookback}{The number of time periods to look back before the

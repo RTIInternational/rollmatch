@@ -2,7 +2,7 @@
 % Please edit documentation in R/utility_functions.R
 \name{trimPool}
 \alias{trimPool}
-\title{Caliper to trim the comparison data to only observations within threshhold}
+\title{Caliper to trim the comparison data to only observations within threshold}
 \usage{
 trimPool(caliper, data_pool, lr_result, weighted_pooled_stdev = FALSE)
 }
@@ -23,6 +23,6 @@ deviation and TRUE for weighted pooled standard deviation.}
 Dataframe of the trimmed comparisons based on the caliper value
 }
 \description{
-Caliper to trim the comparison data to only observations within threshhold
+Caliper to trim the comparison data to only observations within threshold
 }
 \keyword{internal}

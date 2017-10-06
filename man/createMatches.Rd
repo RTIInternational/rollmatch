@@ -7,8 +7,8 @@
 createMatches(trimmed_pool, num_matches = 3, replacement = TRUE)
 }
 \arguments{
-\item{num_matches}{Integer. the number of comparison beneficary matches to
-attemptto assign to each treatment beneficiary}
+\item{num_matches}{Integer. the number of comparison beneficiary matches to
+attempt to assign to each treatment beneficiary}
 
 \item{replacement}{Boolean. Assign comparison beneficiaries with replacement
 (TRUE) or without replacement (FALSE). If \code{replacement} is TRUE, then
