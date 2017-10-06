@@ -5,5 +5,6 @@
 ^.DS_Store
 ^cran-comments\.md$
 ^man/figures
+^man/manuals
 ^.gitignore
 ^.git

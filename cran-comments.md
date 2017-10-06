@@ -1,12 +1,11 @@
 ## Test environments
 * local OS X install (10.12 "Sierra"), R 3.3.3
-* ubuntu 12.04 (on travis-ci), R 3.1.2
 * win-builder (devel and release)
 
 ## R CMD check results
 There were no `ERRORs`, `WARNINGs` or `NOTEs` when run locally on OS X.
 
-When checking with win-builder through `devtools::build_win()`, there was 1 `NOTE`:
+When checking with win-builder using `devtools::build_win()`, there was 1 `NOTE`:
 
 > * checking CRAN incoming feasibility ... NOTE
 >   Maintainer: 'Rob Chew <rchew@rti.org>'
