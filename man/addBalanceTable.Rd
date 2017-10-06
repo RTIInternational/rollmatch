@@ -7,7 +7,7 @@
 addBalanceTable(reduced_data, vars, tm, id, out, treat, matches)
 }
 \arguments{
-\item{reduced_data}{Dataframe of reduced treament and comparison data}
+\item{reduced_data}{Dataframe of reduced treatment and comparison data}
 
 \item{vars}{A vector of dataframe column names}
 

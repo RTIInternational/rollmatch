@@ -31,7 +31,7 @@
 #' pre-treatment covariates must be contained in the input dataset.
 #' @param data The input panel dataset.
 #' @param tm The time period indicator.
-#' @param entry The time period in which the paricipant enrolled in the
+#' @param entry The time period in which the participant enrolled in the
 #' intervention (in the same units as the tm variable).
 #' @param id The individual id variable.
 #' @param lookback The number of time periods to look back before the
@@ -43,7 +43,7 @@
 #' @param weighted_pooled_stdev Option that allows for weighted pooled standard
 #' deviation for caliper matching. FALSE for average pooled standard
 #' deviation and TRUE for weighted pooled standard deviation.
-#' @param num_matches The number of comparison beneficary matches to attempt
+#' @param num_matches The number of comparison beneficiary matches to attempt
 #' to assign to each treatment beneficiary
 #' @param match_on Match on estimated propensity score ("pscore") or logit of
 #' estimated propensity score ("logit").

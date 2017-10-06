@@ -7,7 +7,7 @@
 trimPool(caliper, data_pool, lr_result, weighted_pooled_stdev = FALSE)
 }
 \arguments{
-\item{caliper}{The pre-specified distance whithin which to allow matching.
+\item{caliper}{The pre-specified distance within which to allow matching.
 The caliper width is calculated as the \code{caliper} multiplied by the
 pooled standard deviation of the propensity scores or the logit of the
 propensity scores - depending on the value of \code{match_on}.}

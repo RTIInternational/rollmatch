@@ -108,7 +108,7 @@ createComparison <- function(lr_result, tm, entry, id){
 
 #' Caliper to trim the comparison data to only observations within threshold
 #'
-#' @param caliper The pre-specified distance whithin which to allow matching.
+#' @param caliper The pre-specified distance within which to allow matching.
 #' The caliper width is calculated as the \code{caliper} multiplied by the
 #' pooled standard deviation of the propensity scores or the logit of the
 #' propensity scores - depending on the value of \code{match_on}.
@@ -404,7 +404,7 @@ makeOutput <- function(pred_model, lr_result, data_full, matches, orig.call,
 
 #' Add the balancing table to the final output
 #'
-#' @param reduced_data Dataframe of reduced treament and comparison data
+#' @param reduced_data Dataframe of reduced treatment and comparison data
 #' @param vars A vector of dataframe column names
 #' @param tm The time period indicator
 #' @param id ID variable in dataset

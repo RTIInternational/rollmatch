@@ -19,7 +19,7 @@ pre-treatment covariates must be contained in the input dataset.}
 
 \item{tm}{The time period indicator.}
 
-\item{entry}{The time period in which the paricipant enrolled in the
+\item{entry}{The time period in which the participant enrolled in the
 intervention (in the same units as the tm variable).}
 
 \item{id}{The individual id variable.}
@@ -36,7 +36,7 @@ propensity scores - depending on the value of \code{match_on}.}
 deviation for caliper matching. FALSE for average pooled standard
 deviation and TRUE for weighted pooled standard deviation.}
 
-\item{num_matches}{The number of comparison beneficary matches to attempt
+\item{num_matches}{The number of comparison beneficiary matches to attempt
 to assign to each treatment beneficiary}
 
 \item{match_on}{Match on estimated propensity score ("pscore") or logit of
