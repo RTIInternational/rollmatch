@@ -1,6 +1,8 @@
 rollmatch <img src="man/figures/200px-Rti-logo.png" align="right" />
 ========================================================
 
+[![DOI](https://zenodo.org/badge/105259002.svg)](https://zenodo.org/badge/latestdoi/105259002)
+
 ### Rolling Entry Matching R Package
 
 `rollmatch` is an R package designed to match study participants that start interventions at different times (rolling entry) with an appropriate comparison for the purpose of impact evaluation. Rolling entry presents several challenges for comparison group selection:
