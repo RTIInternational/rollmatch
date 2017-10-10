@@ -9,3 +9,4 @@
 ^man/manuals
 ^.gitignore
 ^.git
+^\.travis\.yml$
