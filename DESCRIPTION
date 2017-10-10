@@ -4,8 +4,9 @@ Version: 1.0.0
 Date: 2017-10-09
 Author: Rob Chew [aut, cre], Kasey Jones [aut, cre], Mahin Manley [aut], Allison Witman [res], Chris Beadles [res],Yiyan (Echo) Liu [res], Ann Larson [res]
 Maintainer: Rob Chew <rchew@rti.org>
-Description: Functions to perform propensity score matching on rolling entry interventions for which a suitable "entry" date is not observed for nonparticipants. For more details, please reference Chew (2017) <doi:10.5281/zenodo.1007779>.
+Description: Functions to perform propensity score matching on rolling entry interventions for which a suitable "entry" date is not observed for nonparticipants. For more details, please reference Witman, Beadles, Hoerger, Liu, Kafali, Gandhi, Amico, and Larsen (2016) <https://academyhealth.confex.com/academyhealth/2016arm/meetingapp.cgi/Paper/9375>.
 License: MIT + file LICENSE
+URL: https://github.com/RTIInternational/rollmatch
 Depends:
     R (>= 3.0.2)
 Imports:

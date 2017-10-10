@@ -1,7 +1,7 @@
 rollmatch <img src="man/figures/200px-Rti-logo.png" align="right" />
 ========================================================
 
-[![DOI](https://zenodo.org/badge/105259002.svg)](https://zenodo.org/badge/latestdoi/105259002)
+![travis-ci build status](https://travis-ci.org/RTIInternational/rollmatch.svg?branch=master)[![DOI](https://zenodo.org/badge/105259002.svg)](https://zenodo.org/badge/latestdoi/105259002)
 
 ### Rolling Entry Matching R Package
 
