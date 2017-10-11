@@ -2,7 +2,8 @@
 % Please edit documentation in R/utility_functions.R
 \name{createMatches}
 \alias{createMatches}
-\title{Algorithm to find best matches from the comparison pool}
+\title{Algorithm to find best matches from the comparison pool
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
 \usage{
 createMatches(trimmed_pool, num_matches = 3, replacement = TRUE)
 }
@@ -24,5 +25,16 @@ Dataframe containing top matches
 }
 \description{
 Algorithm to find best matches from the comparison pool
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
+}
+\examples{
+\dontrun{ 
+num_matches <- 3; replacement <- TRUE
+load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+                "tests/testthat/trimmed_pool.rda")))
+matches <- createMatches(trimmed_pool, num_matches, replacement)
+head(matches)
+}
+
 }
 \keyword{internal}

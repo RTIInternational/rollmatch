@@ -2,7 +2,8 @@
 % Please edit documentation in R/utility_functions.R
 \name{chr_2_factor}
 \alias{chr_2_factor}
-\title{Convert character variables in formula to factor variables}
+\title{Convert character variables in formula to factor variables.
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
 \usage{
 chr_2_factor(df, vars)
 }
@@ -15,7 +16,8 @@ chr_2_factor(df, vars)
 Dataframe where all character variables are now factors
 }
 \description{
-Convert character variables in formula to factor variables
+Convert character variables in formula to factor variables.
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
 }
 \examples{
 \dontrun{
@@ -23,7 +25,8 @@ df <- data.frame(x = 1:3, y = 3:1, z = c("a", "b", "c"),
                  stringsAsFactors = FALSE)
 vars <- names(df)
 newdf <- df <- chr_2_factor(df, vars)
-lapply(df, class)}
+lapply(df, class)
+}
 
 }
 \keyword{internal}

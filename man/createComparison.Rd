@@ -2,7 +2,8 @@
 % Please edit documentation in R/utility_functions.R
 \name{createComparison}
 \alias{createComparison}
-\title{Create a dataframe of comparisons between all treatment and control data}
+\title{Create a dataframe of comparisons between all treatment and control data
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
 \usage{
 createComparison(lr_result, tm, entry, id)
 }
@@ -21,5 +22,16 @@ Dataframe comparing all treatment and control data
 }
 \description{
 Create a dataframe of comparisons between all treatment and control data
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
+}
+\examples{
+\dontrun{ 
+load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+                 "tests/testthat/lr_result.rda")))
+tm <- "quarter"; entry <- "entry_q"; id <- "indiv_id"
+comparison_pool <- createComparison(lr_result, tm, entry, id)
+head(comparison_pool)
+}
+
 }
 \keyword{internal}

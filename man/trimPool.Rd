@@ -2,7 +2,8 @@
 % Please edit documentation in R/utility_functions.R
 \name{trimPool}
 \alias{trimPool}
-\title{Caliper to trim the comparison data to only observations within threshold}
+\title{Caliper to trim the comparison data to only observations within threshold
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
 \usage{
 trimPool(caliper, data_pool, lr_result, weighted_pooled_stdev = FALSE)
 }
@@ -24,5 +25,18 @@ Dataframe of the trimmed comparisons based on the caliper value
 }
 \description{
 Caliper to trim the comparison data to only observations within threshold
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
+}
+\examples{
+\dontrun{ 
+load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+                 "tests/testthat/lr_result.rda")))
+load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+                "tests/testthat/comparison_pool.rda")))
+trimmed_pool <- trimPool(caliper = .2, data_pool = comparison_pool,
+                         lr_result = lr_result)
+head(trimmed_poll)
+}
+                         
 }
 \keyword{internal}

@@ -2,7 +2,8 @@
 % Please edit documentation in R/utility_functions.R
 \name{addMatchesColumns}
 \alias{addMatchesColumns}
-\title{Create additional columns for the matches dataset}
+\title{Create additional columns for the matches dataset
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
 \usage{
 addMatchesColumns(matches)
 }
@@ -14,5 +15,15 @@ Dataframe containing top matches
 }
 \description{
 Create additional columns for the matches dataset
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
+}
+\examples{
+\dontrun{ 
+load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+                "tests/testthat/matches.rda")))
+newmatches <- addMatchesColumns(matches)
+head(newmatches)
+}
+
 }
 \keyword{internal}

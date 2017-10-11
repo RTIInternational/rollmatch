@@ -1,5 +1,5 @@
 # Set Variables 
-fm <- as.formula(treat ~ qtr_pmt + yr_pmt + age + is_male + is_white +
+formula <- as.formula(treat ~ qtr_pmt + yr_pmt + age + is_male + is_white +
                    is_disabled + is_esrd + months_dual + chron_num + lq_ed +
                    yr_ed2 + lq_ip + yr_ip2)
 vars <- all.vars(formula)
@@ -23,8 +23,8 @@ test_that("addBalanceTable should run without error. There should be 9 items", {
 test_that("addBalanceTable should run without error. There should be 9 items", {
   expect_equal(class(finalout$balance), "data.frame")
 })
-test_that("addBalanceTable should have 12 rows - one for each item in fm", {
-  expect_equal(dim(finalout$balance)[1], 12)
+test_that("addBalanceTable should have 13 rows - one for each item in fm", {
+  expect_equal(dim(finalout$balance)[1], 13)
 })
 test_that("addBalanceTable should have 8 columns", {
   expect_equal(dim(finalout$balance)[2], 8)

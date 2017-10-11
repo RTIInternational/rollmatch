@@ -2,7 +2,8 @@
 % Please edit documentation in R/utility_functions.R
 \name{createWeights}
 \alias{createWeights}
-\title{Create control weights for matches dataset, and final data output}
+\title{Create control weights for matches dataset, and final data output
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
 \usage{
 createWeights(matches, data, id)
 }
@@ -20,5 +21,19 @@ with weights added.
 }
 \description{
 Create control weights for matches dataset, and final data output
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
+}
+\examples{
+\dontrun{ 
+id <- "indiv_id"
+data(package="rollmatch", "rem_synthdata")
+load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+                "tests/testthat/matches.rda")))
+data <- rem_synthdata
+matches <- addMatchesColumns(matches)
+out_list <- createWeights(matches, data, id)
+head(a)
+}
+
 }
 \keyword{internal}

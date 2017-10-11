@@ -2,7 +2,8 @@
 % Please edit documentation in R/utility_functions.R
 \name{addBalanceTable}
 \alias{addBalanceTable}
-\title{Add the balancing table to the final output}
+\title{Add the balancing table to the final output
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
 \usage{
 addBalanceTable(reduced_data, vars, tm, id, combined_output, treat, matches)
 }
@@ -29,5 +30,16 @@ component to the list out:
 }
 \description{
 Add the balancing table to the final output
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
+}
+\examples{
+\dontrun{ 
+fm <- as.formula(treat ~ qtr_pmt + yr_pmt + age + is_male + is_white +
+                 is_disabled + is_esrd + months_dual + chron_num+lq_ed+
+                 yr_ed2 + lq_ip + yr_ip2)
+vars <- all.vars(formula); treat <- vars[1]
+tm <- "quarter"; id <- "indiv_id"
+}
+
 }
 \keyword{internal}

@@ -2,7 +2,8 @@
 % Please edit documentation in R/utility_functions.R
 \name{makeOutput}
 \alias{makeOutput}
-\title{Combine the results of rollmatch into a tidy list for output}
+\title{Combine the results of rollmatch into a tidy list for output
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
 \usage{
 makeOutput(pred_model, lr_result, data_full, matches, orig.call, formula, tm,
   entry, lookback)
@@ -42,5 +43,27 @@ time period of enrollment (1-10).}
 }
 \description{
 Combine the results of rollmatch into a tidy list for output
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
+}
+\examples{
+\dontrun{ 
+orig.call <- "Ignore"
+formula <- as.formula(treat ~ qtr_pmt + yr_pmt + age + is_male + is_white +
+                       is_disabled + is_esrd + months_dual + chron_num + lq_ed +
+                       yr_ed2 + lq_ip + yr_ip2)
+tm <- "quarter"; entry <- "entry_q"; lookback <- 1
+load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+                "tests/testthat/output.rda")))
+pred_model <- output$pred_model
+lr_result <- output$lr_result
+load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+                "tests/testthat/out_list.rda")))
+data_full <- out_list$data_full
+matches <- out_list$matches
+out <- makeOutput(pred_model, lr_result, data_full, matches, orig.call,
+                  formula, tm, entry, lookback)
+head(out)
+}
+
 }
 \keyword{internal}

@@ -2,7 +2,8 @@
 % Please edit documentation in R/utility_functions.R
 \name{runModel}
 \alias{runModel}
-\title{Run a logistic or probit model}
+\title{Run a logistic or probit model
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
 \usage{
 runModel(model_type, match_on, reduced_data, id, treat, entry, tm, fm)
 }
@@ -27,5 +28,22 @@ predicting values ($lr_result)
 }
 \description{
 Run a logistic or probit model
+As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
+}
+\examples{
+\dontrun{
+data(package="rollmatch", "rem_synthdata_small")
+formula <- as.formula(treat ~ qtr_pmt + age + is_male + is_white +
+                       is_disabled + is_esrd + months_dual + chron_num + lq_ed +
+                       yr_ed2 + lq_ip + yr_ip2)
+vars <- all.vars(formula); treat <- vars[1]
+tm <- "quarter"; entry <- "entry_q"; id <- "indiv_id"
+model_type <- "logistic"; match_on <- "logit"
+reduced_data <- chr_2_factor(rem_synthdata_small, vars)
+model_output <- runModel(model_type, match_on, rem_synthdata_small, id, treat, entry,
+              tm, formula)
+head(model_output)
+}
+
 }
 \keyword{internal}
