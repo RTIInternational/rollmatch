@@ -1,7 +1,7 @@
 rollmatch <img src="man/figures/200px-Rti-logo.png" align="right" />
 ========================================================
 
-![travis-ci build status](https://travis-ci.org/RTIInternational/rollmatch.svg?branch=master) [![DOI](https://zenodo.org/badge/105259002.svg)](https://zenodo.org/badge/latestdoi/105259002)
+![travis-ci build status](https://travis-ci.org/RTIInternational/rollmatch.svg?branch=master) ![CRAN statusbadge](https://www.r-pkg.org/badges/version/rollmatch) [![DOI](https://zenodo.org/badge/105259002.svg)](https://zenodo.org/badge/latestdoi/105259002)
 
 ### Rolling Entry Matching R Package
 
@@ -15,7 +15,10 @@ This method, called Rolling Entry Matching, assigns potential comparison non-par
 ### Installation
 
 ```r
-# Install the development version from GitHub:
+# Install from CRAN:
+install.packages("rollmatch")
+
+# Or try out the development version on GitHub:
 # install.packages("devtools")
 devtools::install_github("RTIInternational/rollmatch")
 ```

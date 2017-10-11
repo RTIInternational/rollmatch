@@ -106,7 +106,7 @@ runModel <- function(model_type, match_on, reduced_data, id, treat, entry,
 }
 
 
-#' Create a dataframe of comparisons between all treatment and control data
+#' Create a dataframe of comparisons between all treatment and control data.
 #' As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
 #'
 #' @param lr_result The dataset given to runModel with the additional of the

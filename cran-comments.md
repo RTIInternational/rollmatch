@@ -2,8 +2,6 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Adopted the CRAN template for the MIT license ad LICENSE file.
-* Reduced the size of the CRAN package to < 5 MB (now at 1.8 MB).
 * Added a reference in the "Description" field of the DESCRIPTION file.
 * Added small executable examples to the internal helper functions.
 	* Although we added examples, these functions are not directly accessble to users of the package and are not exported.   
