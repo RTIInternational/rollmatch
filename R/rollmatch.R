@@ -87,98 +87,98 @@ rollmatch <- function(formula, data, tm, entry, id, lookback = 1, caliper = 0,
 
   ############################################################################
 
-  if(is.language(formula) == FALSE){
+  if (is.language(formula) == FALSE){
     stop("'formula' input parameter must be of type 'language'")
   }
 
-  if(is.data.frame(data) == FALSE){
+  if (is.data.frame(data) == FALSE){
     stop("'data' input parameter must be a data.frame")
   }
 
-  if(is.character(tm) == FALSE){
+  if (is.character(tm) == FALSE){
     stop("'tm' input parameter must be a string")
   }
 
   try_tm <- try(data[tm], silent = TRUE)
-  if(class(try_tm) == "try-error"){
+  if (class(try_tm) == "try-error"){
     stop("'tm' input parameter must be a column in the data.frame")
   }
 
-  if(all(data[tm] == floor(data[tm])) == FALSE){
+  if (all(data[tm] == floor(data[tm])) == FALSE){
     stop("'tm' input variable must resolve to a vector of whole numbers")
   }
 
-  if(all(data[tm] > 0) == FALSE){
+  if (all(data[tm] > 0) == FALSE){
     stop("'tm' input variable must resolve to a vector of positive numbers")
   }
 
-  if(is.character(entry) == FALSE){
+  if (is.character(entry) == FALSE){
     stop("'entry' input parameter must be a string")
   }
 
   try_entry <- try(data[entry], silent = TRUE)
-  if(class(try_entry) == "try-error"){
+  if (class(try_entry) == "try-error"){
     stop("'entry' input parameter must be a column in the data.frame")
   }
 
-  if(all(data[entry] == floor(data[entry])) == FALSE){
+  if (all(data[entry] == floor(data[entry])) == FALSE){
     stop("'entry' input variable must resolve to a vector of whole numbers")
   }
 
-  if(all(data[entry] > 0) == FALSE){
+  if (all(data[entry] > 0) == FALSE){
     stop("'entry' input variable must resolve to a vector of positive numbers")
   }
 
-  if(is.character(id) == FALSE){
+  if (is.character(id) == FALSE){
     stop("'id' input parameter must be a string")
   }
 
   try_id <- try(data[id], silent = TRUE)
-  if(class(try_id) == "try-error"){
+  if (class(try_id) == "try-error"){
     stop("'id' input parameter must be a column in the data.frame")
   }
 
-  if(is.numeric(lookback) == FALSE){
+  if (is.numeric(lookback) == FALSE){
     stop("'lookback' input parameter must be of type numeric")
   }
 
-  if((lookback == floor(lookback)) == FALSE){
+  if ( (lookback == floor(lookback)) == FALSE){
     stop("'lookback' input parameter must be a whole number")
   }
 
-  if(between(lookback,1,10) == FALSE){
+  if (between(lookback, 1, 10) == FALSE){
     stop("'lookback' input parameter must be between 1 and 10")
   }
 
-  if(lookback > max(data[entry])){
+  if (lookback > max(data[entry])){
     stop("'lookback' is greater than number of time periods in data set")
   }
 
-  if(is.numeric(caliper) == FALSE){
+  if (is.numeric(caliper) == FALSE){
     stop("'caliper' input parameter must be numeric")
   }
 
-  if(caliper < 0){
+  if (caliper < 0){
     stop("'caliper' input parameter must be a positive number")
   }
 
-  if(is.logical(weighted_pooled_stdev) == FALSE){
+  if (is.logical(weighted_pooled_stdev) == FALSE){
     stop("'weighted_pooled_stdev' input parameter must be of type 'logical'")
   }
 
-  if(is.numeric(num_matches) == FALSE){
+  if (is.numeric(num_matches) == FALSE){
     stop("'num_matches' input parameter must be numeric")
   }
 
-  if((num_matches == floor(num_matches)) == FALSE){
+  if ( (num_matches == floor(num_matches)) == FALSE){
     stop("'num_matches' input parameter must be a whole number")
   }
 
-  if(num_matches < 0){
+  if (num_matches < 0){
     stop("'num_matches' input parameter must be a positive number")
   }
 
-  if(is.logical(replacement) == FALSE){
+  if (is.logical(replacement) == FALSE){
     stop("'replacement' input parameter must be of type 'logical'")
   }
 
@@ -199,15 +199,15 @@ rollmatch <- function(formula, data, tm, entry, id, lookback = 1, caliper = 0,
   reduced_data <- chr_2_factor(reduced_data, vars)
 
   # Run model and save output
-  output <- runModel(model_type, match_on, reduced_data, id, treat, entry,
+  model_output <- runModel(model_type, match_on, reduced_data, id, treat, entry,
                      tm, formula)
 
   #w <- tryCatch(runModel(model_type, match_on, reduced_data, id,
   #                                 treat, entry,tm, formula),
   #                        warning = function(w) w)
 
-  lr_result <- output$lr_result
-  pred_model <- output$pred_model
+  lr_result <- model_output$lr_result
+  pred_model <- model_output$pred_model
 
   # Create pool of possible matches
   comparison_pool <- createComparison(lr_result, tm, entry, id)
@@ -225,10 +225,11 @@ rollmatch <- function(formula, data, tm, entry, id, lookback = 1, caliper = 0,
   matches <- out_list$matches
   data_full <- out_list$data_full
   # Combine datasets and values in preperation for output
-  out <- makeOutput(pred_model, lr_result, data_full, matches, orig.call,
-                    formula, tm, entry, lookback)
+  combined_output <- makeOutput(pred_model, lr_result, data_full, matches,
+                                orig.call, formula, tm, entry, lookback)
   # Add balance table to the output
-  out <- addBalanceTable(reduced_data, vars, tm, id, out, treat, matches)
+  out <- addBalanceTable(reduced_data, vars, tm, id, combined_output,
+                         treat, matches)
   # Set the class
   class(out) <- "rem"
 

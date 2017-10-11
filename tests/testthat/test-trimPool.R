@@ -1,9 +1,9 @@
 
 # Load data
-load("output.rda")
+load("model_output.rda")
 load("comparison_pool.rda")
 
-lr_result <- output$lr_result
+lr_result <- model_output$lr_result
 trimmed_pool <- trimPool(caliper = .2, data_pool = comparison_pool,
                             lr_result = lr_result)
 # To save for next test: save(trimmed_pool, file = "trimmed_pool.rda")

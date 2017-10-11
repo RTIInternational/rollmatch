@@ -4,8 +4,8 @@ entry <- "entry_q"
 id <- "indiv_id"
 
 # Load data
-load("output.rda")
-lr_result <- output$lr_result
+load("model_output.rda")
+lr_result <- model_output$lr_result
 
 comparison_pool <- createComparison(lr_result, tm, entry, id)
 # To save for the next test: save(comparison_pool, file = "comparison_pool.rda")

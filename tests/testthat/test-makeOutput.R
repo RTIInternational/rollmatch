@@ -8,9 +8,9 @@ entry <- "entry_q"
 lookback <- 1
 
 # Load data
-load("output.rda")
-pred_model <- output$pred_model
-lr_result <- output$lr_result
+load("model_output.rda")
+pred_model <- model_output$pred_model
+lr_result <- model_output$lr_result
 load("out_list.rda")
 data_full <- out_list$data_full
 matches <- out_list$matches

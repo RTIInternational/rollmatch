@@ -8,6 +8,14 @@
 #' @param df A dataframe.
 #' @param vars A vector of dataframe column names
 #' @return Dataframe where all character variables are now factors
+#' 
+#' @example
+#' df <- data.frame(x = 1:3, y = 3:1, z = c("a", "b", "c"),
+#'                  stringsAsFactors = FALSE)
+#' vars <- names(df)
+#' newdf <- df <- chr_2_factor(df, vars)
+#' lapply(df, class)
+#' 
 #' @keywords internal
 chr_2_factor <- function(df, vars){
   if (is.data.frame(df) == TRUE ){
@@ -34,12 +42,26 @@ chr_2_factor <- function(df, vars){
 #' @param id ID variable in dataset
 #' @param treat Treatment variable in dataset
 #' @param entry Entry quarter variable in dataset
+#' 
+#' @example 
+#' data(package="rollmatch", "rem_synthdata_small")
+#' formula <- as.formula(treat ~ qtr_pmt + age + is_male + is_white +
+#'                        is_disabled + is_esrd + months_dual + chron_num + lq_ed +
+#'                        yr_ed2 + lq_ip + yr_ip2)
+#' vars <- all.vars(formula); treat <- vars[1]
+#' tm <- "quarter"; entry <- "entry_q"; id <- "indiv_id"
+#' model_type <- "logistic"; match_on <- "logit"
+#' reduced_data <- chr_2_factor(rem_synthdata_small, vars)
+#' model_output <- runModel(model_type, match_on, rem_synthdata_small, id, treat, entry,
+#'               tm, formula)
+#' head(model_output)
+#' 
 #' @return list of the model ($pred_model) and the resulting dataframe with
 #' predicting values ($lr_result)
 #' @keywords internal
 runModel <- function(model_type, match_on, reduced_data, id, treat, entry,
                      tm, fm){
-  glm <- "."; binomial <- "."; qlogis <- "."; var <- "."
+  glm <- "."; binomial <- "."; qlogis <- "."; # var <- "."
 
   if (model_type %in% c("logistic", "probit")){
     if (model_type == "logistic") {
@@ -85,6 +107,14 @@ runModel <- function(model_type, match_on, reduced_data, id, treat, entry,
 #' @param tm The time period indicator
 #' @param entry Entry quarter for subject
 #' @param id ID variable in dataset
+#' 
+#' @example 
+#' load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+#'                  "tests/testthat/lr_result.rda")))
+#' tm <- "quarter"; entry <- "entry_q"; id <- "indiv_id"
+#' comparison_pool <- createComparison(lr_result, tm, entry, id)
+#' head(comparison_pool)
+#' 
 #' @return Dataframe comparing all treatment and control data
 #' @keywords internal
 createComparison <- function(lr_result, tm, entry, id){
@@ -116,9 +146,19 @@ createComparison <- function(lr_result, tm, entry, id){
 #' @param lr_result Dataframe of results from model in runModel.
 #' @param weighted_pooled_stdev Boolean. FALSE for average pooled standard
 #' deviation and TRUE for weighted pooled standard deviation.
+#' 
+#' @example 
+#' load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+#'                  "tests/testthat/lr_result.rda")))
+#' load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+#'                 "tests/testthat/comparison_pool.rda")))
+#' trimmed_pool <- trimPool(caliper = .2, data_pool = comparison_pool,
+#'                          lr_result = lr_result)
+#' head(trimmed_poll)
+#'                           
 #' @return Dataframe of the trimmed comparisons based on the caliper value
 #' @keywords internal
-trimPool <- function(caliper, data_pool,lr_result,
+trimPool <- function(caliper, data_pool, lr_result,
                      weighted_pooled_stdev = FALSE){
   var <- "."
 
@@ -161,6 +201,14 @@ trimPool <- function(caliper, data_pool,lr_result,
 #' comparison beneficiaries will be allowed to be used with replacement within
 #' a single quarter, but will be allowed to match to different treatment
 #' beneficiaries across multiple quarters.
+#' 
+#' @example 
+#' num_matches <- 3; replacement <- TRUE
+#' load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+#'                 "tests/testthat/trimmed_pool.rda")))
+#' matches <- createMatches(trimmed_pool, num_matches, replacement)
+#' head(matches)
+#' 
 #' @return Dataframe containing top matches
 #' @keywords internal
 createMatches <- function(trimmed_pool, num_matches = 3, replacement=TRUE){
@@ -278,6 +326,13 @@ createMatches <- function(trimmed_pool, num_matches = 3, replacement=TRUE){
 #' Create additional columns for the matches dataset
 #'
 #' @param Matches Dataframe containing the matches from comparison_pool
+#' 
+#' @example 
+#' load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+#'                 "tests/testthat/matches.rda")))
+#' newmatches <- addMatchesColumns(matches)
+#' head(newmatches)
+#' 
 #' @return Dataframe containing top matches
 #' @keywords internal
 addMatchesColumns <- function(matches){
@@ -302,6 +357,17 @@ addMatchesColumns <- function(matches){
 #'
 #' @param matches Dataframe containing the matches from comparison_pool
 #' @param data The original data provided for the function.
+#' 
+#' @example 
+#' id <- "indiv_id"
+#' data(package="rollmatch", "rem_synthdata")
+#' load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+#'                 "tests/testthat/matches.rda")))
+#' data <- rem_synthdata
+#' matches <- addMatchesColumns(matches)
+#' out_list <- createWeights(matches, data, id)
+#' head(a)
+#' 
 #' @return A list containing two Dataframes. Matches - an updated dataset with
 #' control weights added, and data_full an updated version of the original data
 #' with weights added.
@@ -353,6 +419,25 @@ createWeights <- function(matches, data, id){
 #' intervention (in the same units as the tm variable).
 #' @param lookback The number of time periods to look back before the
 #' time period of enrollment (1-10).
+#' 
+#' @example 
+#' orig.call <- "Ignore"
+#' formula <- as.formula(treat ~ qtr_pmt + yr_pmt + age + is_male + is_white +
+#'                        is_disabled + is_esrd + months_dual + chron_num + lq_ed +
+#'                        yr_ed2 + lq_ip + yr_ip2)
+#' tm <- "quarter"; entry <- "entry_q"; lookback <- 1
+#' load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+#'                 "tests/testthat/output.rda")))
+#' pred_model <- output$pred_model
+#' lr_result <- output$lr_result
+#' load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
+#'                 "tests/testthat/out_list.rda")))
+#' data_full <- out_list$data_full
+#' matches <- out_list$matches
+#' out <- makeOutput(pred_model, lr_result, data_full, matches, orig.call,
+#'                   formula, tm, entry, lookback)
+#' head(out)
+#' 
 #' @return \code{output} returns a list containing the following components:
 #' \item{call}{The original \code{rollmatch} call.}
 #' \item{model}{The output of the model used to estimate the distance measure.}
@@ -408,14 +493,24 @@ makeOutput <- function(pred_model, lr_result, data_full, matches, orig.call,
 #' @param vars A vector of dataframe column names
 #' @param tm The time period indicator
 #' @param id ID variable in dataset
-#' @param out A list of output for the rollmatch package. See makeOutput
+#' @param combined_output A list of output for the rollmatch package. 
+#' See makeOutput
 #' @param treat The Treatment variable
 #' @param matches Dataframe containing the matches from comparison_pool
+#' 
+#' @example 
+#' fm <- as.formula(treat ~ qtr_pmt + yr_pmt + age + is_male + is_white +
+#'                  is_disabled + is_esrd + months_dual + chron_num+lq_ed+
+#'                  yr_ed2 + lq_ip + yr_ip2)
+#' vars <- all.vars(formula); treat <- vars[1]
+#' tm <- "quarter"; id <- "indiv_id"
+#' 
 #' @return \code{output} returns a list containing the following additional
 #' component to the list out:
 #' \item{balance}{The balancing table.}
 #' @keywords internal
-addBalanceTable <- function(reduced_data, vars, tm, id, out, treat, matches){
+addBalanceTable <- function(reduced_data, vars, tm, id, combined_output,
+                            treat, matches){
   treat_group <- reduced_data[, vars] %>% dplyr::group_by(treat)
 
   full_summary <-
@@ -442,14 +537,14 @@ addBalanceTable <- function(reduced_data, vars, tm, id, out, treat, matches){
     c("Matched Comparison Mean", "Matched Treatment Mean",
       "Matched Comparison Std Dev", "Matched Treatment Std Dev")
 
-  out$balance <- cbind(full_summary, matched_summary)
+  combined_output$balance <- cbind(full_summary, matched_summary)
 
-  out$balance <-
-    out$balance[-1, c("Full Treatment Mean", "Full Comparison Mean",
+  combined_output$balance <-
+    combined_output$balance[-1, c("Full Treatment Mean", "Full Comparison Mean",
                       "Full Treatment Std Dev", "Full Comparison Std Dev",
                       "Matched Treatment Mean", "Matched Comparison Mean",
                       "Matched Treatment Std Dev",
                       "Matched Comparison Std Dev")]
 
-  return(out)
+  return(combined_output)
 }

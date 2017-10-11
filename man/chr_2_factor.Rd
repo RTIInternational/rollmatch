@@ -17,4 +17,13 @@ Dataframe where all character variables are now factors
 \description{
 Convert character variables in formula to factor variables
 }
+\examples{
+\dontrun{
+df <- data.frame(x = 1:3, y = 3:1, z = c("a", "b", "c"),
+                 stringsAsFactors = FALSE)
+vars <- names(df)
+newdf <- df <- chr_2_factor(df, vars)
+lapply(df, class)}
+
+}
 \keyword{internal}

@@ -4,7 +4,7 @@
 \alias{addBalanceTable}
 \title{Add the balancing table to the final output}
 \usage{
-addBalanceTable(reduced_data, vars, tm, id, out, treat, matches)
+addBalanceTable(reduced_data, vars, tm, id, combined_output, treat, matches)
 }
 \arguments{
 \item{reduced_data}{Dataframe of reduced treatment and comparison data}
@@ -15,7 +15,8 @@ addBalanceTable(reduced_data, vars, tm, id, out, treat, matches)
 
 \item{id}{ID variable in dataset}
 
-\item{out}{A list of output for the rollmatch package. See makeOutput}
+\item{combined_output}{A list of output for the rollmatch package. 
+See makeOutput}
 
 \item{treat}{The Treatment variable}
 
