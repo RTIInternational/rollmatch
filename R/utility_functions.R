@@ -145,11 +145,10 @@ createComparison <- function(lr_result, tm, entry, id){
   return(comparison_pool)
 }
 
-#' Caliper to trim the comparison data to only observations within threshold
-#' As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
+#' Use a caliper to trim the comparison data to only observations within threshold
 #'
-#' @param caliper The pre-specified distance within which to allow matching.
-#' The caliper width is calculated as the \code{caliper} multiplied by the
+#' @param alpha The pre-specified distance within which to allow matching.
+#' The caliper width is calculated as the \code{alpha} multiplied by the
 #' pooled standard deviation of the propensity scores or the logit of the
 #' propensity scores - depending on the value of \code{match_on}.
 #' @param dataPool Dataframe of comparison data to be trimmed.
@@ -163,21 +162,21 @@ createComparison <- function(lr_result, tm, entry, id){
 #'                  "tests/testthat/lr_result.rda")))
 #' load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
 #'                 "tests/testthat/comparison_pool.rda")))
-#' trimmed_pool <- trimPool(caliper = .2, data_pool = comparison_pool,
+#' trimmed_pool <- trimPool(alpha = .2, data_pool = comparison_pool,
 #'                          lr_result = lr_result)
 #' head(trimmed_poll)
 #' }
 #'                          
-#' @return Dataframe of the trimmed comparisons based on the caliper value
+#' @return Dataframe of the trimmed comparisons based on the alpha value
 #' @keywords internal
-trimPool <- function(caliper, data_pool, lr_result,
+trimPool <- function(alpha, data_pool, lr_result,
                      weighted_pooled_stdev = FALSE){
   var <- "."
 
   if (dim(data_pool)[1] == 0){
     stop("data_pool is empty")
   }
-  if (caliper != 0) {
+  if (alpha != 0) {
     var_treat <- var(lr_result[(lr_result$treat == 1), "score"])
     var_untreat <- var(lr_result[(lr_result$treat == 0), "score"])
 
@@ -190,7 +189,7 @@ trimPool <- function(caliper, data_pool, lr_result,
         (dim(lr_result)[1] - 2)
     }
 
-    width <- caliper * pooled_stdev
+    width <- alpha * pooled_stdev
     trimmed_data <- dplyr::filter(data_pool, data_pool$difference <= width)
   } else {
     trimmed_data <- data_pool

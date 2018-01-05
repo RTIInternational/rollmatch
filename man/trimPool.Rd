@@ -2,14 +2,13 @@
 % Please edit documentation in R/utility_functions.R
 \name{trimPool}
 \alias{trimPool}
-\title{Caliper to trim the comparison data to only observations within threshold
-As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
+\title{Use a caliper to trim the comparison data to only observations within threshold}
 \usage{
-trimPool(caliper, data_pool, lr_result, weighted_pooled_stdev = FALSE)
+trimPool(alpha, data_pool, lr_result, weighted_pooled_stdev = FALSE)
 }
 \arguments{
-\item{caliper}{The pre-specified distance within which to allow matching.
-The caliper width is calculated as the \code{caliper} multiplied by the
+\item{alpha}{The pre-specified distance within which to allow matching.
+The caliper width is calculated as the \code{alpha} multiplied by the
 pooled standard deviation of the propensity scores or the logit of the
 propensity scores - depending on the value of \code{match_on}.}
 
@@ -21,11 +20,10 @@ deviation and TRUE for weighted pooled standard deviation.}
 \item{dataPool}{Dataframe of comparison data to be trimmed.}
 }
 \value{
-Dataframe of the trimmed comparisons based on the caliper value
+Dataframe of the trimmed comparisons based on the alpha value
 }
 \description{
-Caliper to trim the comparison data to only observations within threshold
-As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
+Use a caliper to trim the comparison data to only observations within threshold
 }
 \examples{
 \dontrun{ 
@@ -33,7 +31,7 @@ load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
                  "tests/testthat/lr_result.rda")))
 load(url(paste0("https://github.com/RTIInternational/rollmatch/raw/master/",
                 "tests/testthat/comparison_pool.rda")))
-trimmed_pool <- trimPool(caliper = .2, data_pool = comparison_pool,
+trimmed_pool <- trimPool(alpha = .2, data_pool = comparison_pool,
                          lr_result = lr_result)
 head(trimmed_poll)
 }

@@ -27,11 +27,6 @@ intervention (in the same units as the tm variable).}
 \item{lookback}{The number of time periods to look back before the
 time period of enrollment (1-10).}
 
-\item{caliper}{The pre-specified distance within which to allow matching.
-The caliper width is calculated as the \code{caliper} multiplied by the
-pooled standard deviation of the propensity scores or the logit of the
-propensity scores - depending on the value of \code{match_on}.}
-
 \item{weighted_pooled_stdev}{Option that allows for weighted pooled standard
 deviation for caliper matching. FALSE for average pooled standard
 deviation and TRUE for weighted pooled standard deviation.}
@@ -51,6 +46,11 @@ or without replacement (FALSE). If \code{replacement} is TRUE, then
 comparison beneficiaries will be allowed to be used with replacement within
 a single quarter, but will be allowed to match to different treatment
 beneficiaries across multiple quarters.}
+
+\item{alpha}{Part of the pre-specified distance within which to allow
+matching. The caliper width is calculated as the \code{alpha} multiplied by the
+pooled standard deviation of the propensity scores or the logit of the
+propensity scores - depending on the value of \code{match_on}.}
 }
 \value{
 \code{rollmatch} returns an object of class "rollmatch".

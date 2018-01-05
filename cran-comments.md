@@ -4,7 +4,7 @@ This is a resubmission. In this version I have:
 
 * Added a reference in the "Description" field of the DESCRIPTION file.
 * Added small executable examples to the internal helper functions.
-	* Although we added examples, these functions are not directly accessble to users of the package and are not exported.   
+	* Although we added examples, these functions are not directly accessble to users of the package and are not exported.
 
 ## Test environments
 * local OS X install (10.12 "Sierra"), R 3.3.3

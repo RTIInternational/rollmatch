@@ -36,8 +36,8 @@
 #' @param id The individual id variable.
 #' @param lookback The number of time periods to look back before the
 #' time period of enrollment (1-10).
-#' @param caliper The pre-specified distance within which to allow matching.
-#' The caliper width is calculated as the \code{caliper} multiplied by the
+#' @param alpha Part of the pre-specified distance within which to allow
+#' matching. The caliper width is calculated as the \code{alpha} multiplied by the
 #' pooled standard deviation of the propensity scores or the logit of the
 #' propensity scores - depending on the value of \code{match_on}.
 #' @param weighted_pooled_stdev Option that allows for weighted pooled standard
@@ -62,7 +62,7 @@
 #' formula <- as.formula(treat ~ qtr_pmt + yr_pmt + age)
 #'
 #' r_match <- rollmatch(formula, data = rem_synthdata_small, tm = "quarter",
-#'                        entry = "entry_q", id = "indiv_id", caliper = 0.2)
+#'                        entry = "entry_q", id = "indiv_id", alpha = 0.2)
 #'
 #' r_match
 #'
@@ -80,7 +80,7 @@
 #' @import magrittr
 #' @export
 #'
-rollmatch <- function(formula, data, tm, entry, id, lookback = 1, caliper = 0,
+rollmatch <- function(formula, data, tm, entry, id, lookback = 1, alpha = 0,
                       weighted_pooled_stdev = FALSE, num_matches = 3,
                       match_on = "logit", model_type = "logistic",
                       replacement=TRUE) {
@@ -154,12 +154,12 @@ rollmatch <- function(formula, data, tm, entry, id, lookback = 1, caliper = 0,
     stop("'lookback' is greater than number of time periods in data set")
   }
 
-  if (is.numeric(caliper) == FALSE){
-    stop("'caliper' input parameter must be numeric")
+  if (is.numeric(alpha) == FALSE){
+    stop("'alpha' input parameter must be numeric")
   }
 
-  if (caliper < 0){
-    stop("'caliper' input parameter must be a positive number")
+  if (alpha < 0){
+    stop("'alpha' input parameter must be a positive number")
   }
 
   if (is.logical(weighted_pooled_stdev) == FALSE){
@@ -212,7 +212,7 @@ rollmatch <- function(formula, data, tm, entry, id, lookback = 1, caliper = 0,
   # Create pool of possible matches
   comparison_pool <- createComparison(lr_result, tm, entry, id)
   # Trim pool based on specified caliper
-  trimmed_pool <- trimPool(caliper = .2, data_pool = comparison_pool,
+  trimmed_pool <- trimPool(alpha = .2, data_pool = comparison_pool,
                            lr_result = lr_result,
                            weighted_pooled_stdev = weighted_pooled_stdev)
 

@@ -125,23 +125,23 @@ test_that("rollmatch 'lookback' is less than number of time periods in data", {
 	             "'lookback' is greater than number of time periods in data set")
 	})
 
-test_that("rollmatch 'caliper' is of type numeric", {
+test_that("rollmatch 'alpha' is of type numeric", {
   	expect_error(rollmatch(formula, rem_synthdata_small, tm, entry, id,
-  	                       caliper = 2), NA)
+  	                       alpha = 2), NA)
   	expect_error(rollmatch(formula, rem_synthdata_small, tm, entry, id,
-  	                       caliper = "fizzbuzz"),
-  	             "'caliper' input parameter must be numeric")
+  	                       alpha = "fizzbuzz"),
+  	             "'alpha' input parameter must be numeric")
 	expect_error(rollmatch(formula, rem_synthdata_small, tm, entry, id,
-	                       caliper = TRUE),
-	             "'caliper' input parameter must be numeric")
+	                       alpha = TRUE),
+	             "'alpha' input parameter must be numeric")
     })
 
-test_that("rollmatch 'caliper' is a positive number", {
+test_that("rollmatch 'alpha' is a positive number", {
   	expect_error(rollmatch(formula, rem_synthdata_small, tm, entry, id,
-  	                       caliper = 0), NA)
+  	                       alpha = 0), NA)
   	expect_error(rollmatch(formula, rem_synthdata_small, tm, entry, id,
-  	                       caliper = -2),
-  	             "'caliper' input parameter must be a positive number")
+  	                       alpha = -2),
+  	             "'alpha' input parameter must be a positive number")
     })
 
 test_that("rollmatch 'weighted_pooled_stdev' is of type logical", {

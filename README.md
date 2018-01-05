@@ -37,7 +37,7 @@ formula <- as.formula(treat ~ qtr_pmt + yr_pmt + age)
 
 # Run rollmatch
 r_match <- rollmatch(formula, data = rem_synthdata_small, tm = "quarter",
-                       entry = "entry_q", id = "indiv_id", caliper = 0.2)
+                       entry = "entry_q", id = "indiv_id", alpha = 0.2)
 
 # View output matches and diagnostics
 r_match
