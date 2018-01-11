@@ -12,6 +12,10 @@ rollmatch <img src="man/figures/200px-Rti-logo.png" align="right" />
 
 This method, called Rolling Entry Matching, assigns potential comparison non-participants multiple counterfactual entry periods which allows for matching of participant and non-participants based on data immediately preceding each participant's specific entry period, rather than using data from a fixed pre-intervention period.
 
+### Video
+
+[![Watch the Intro Video](https://img.youtube.com/vi/_U1bDrL_f-M/0.jpg)](https://www.youtube.com/watch?v=_U1bDrL_f-M)
+
 ### Installation
 
 ```r
