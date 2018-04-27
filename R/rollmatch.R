@@ -53,7 +53,7 @@
 #' @param replacement Assign comparison beneficiaries with replacement (TRUE)
 #' or without replacement (FALSE). If \code{replacement} is TRUE, then
 #' comparison beneficiaries will be allowed to be used with replacement within
-#' a single quarter, but will be allowed to match to different treatment
+#' a single quarter, but will not be allowed to match to different treatment
 #' beneficiaries across multiple quarters.
 #'
 #' @examples
