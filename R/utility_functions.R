@@ -184,9 +184,9 @@ trimPool <- function(alpha, data_pool, lr_result,
       pooled_stdev <- sqrt( (var_treat + var_untreat) / 2)
     } else {
       pooled_stdev <-
-        ( (nrow(lr_result[(lr_result$treat == 1), ]) - 1) * var_treat +
+        sqrt(( (nrow(lr_result[(lr_result$treat == 1), ]) - 1) * var_treat +
            (nrow(lr_result[(lr_result$treat == 0), ]) - 1) * var_untreat) /
-        (dim(lr_result)[1] - 2)
+        (dim(lr_result)[1] - 2))
     }
 
     width <- alpha * pooled_stdev
