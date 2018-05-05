@@ -212,7 +212,7 @@ rollmatch <- function(formula, data, tm, entry, id, lookback = 1, alpha = 0,
   # Create pool of possible matches
   comparison_pool <- createComparison(lr_result, tm, entry, id)
   # Trim pool based on specified caliper
-  trimmed_pool <- trimPool(alpha = .2, data_pool = comparison_pool,
+  trimmed_pool <- trimPool(alpha = alpha, data_pool = comparison_pool,
                            lr_result = lr_result,
                            weighted_pooled_stdev = weighted_pooled_stdev)
 
