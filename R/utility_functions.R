@@ -190,7 +190,7 @@ trimPool <- function(alpha, data_pool, lr_result,
     }
 
     width <- alpha * pooled_stdev
-    trimmed_data <- dplyr::filter(data_pool, data_pool$difference <= width)
+    trimmed_data <- dplyr::filter(data_pool, data_pool$difference <= as.numeric(width))
   } else {
     trimmed_data <- data_pool
   }
