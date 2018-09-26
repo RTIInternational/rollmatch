@@ -228,81 +228,87 @@ trimPool <- function(alpha, data_pool, lr_result,
 createMatches <- function(trimmed_pool, num_matches = 3, replacement=TRUE){
   # initialize matches as empty
   matches <- trimmed_pool[0, ]
-
-  # Prematch. Assign controls to treatments that have just one possible match.
-  treat_id <- "."; num.controls <- "."; control_id <- "."; time <- "."
-  difference <- "."; num.assigned <- "."; reshape <- "."; aggregate <- "."
-  just_one <- trimmed_pool %>%
-    dplyr::group_by(treat_id) %>%
-    dplyr::summarise(num.controls = n()) %>%
-    dplyr::filter(num.controls == 1)
-
-  matches <- dplyr::bind_rows(matches, trimmed_pool %>%
-                                dplyr::filter(treat_id %in% just_one$treat_id))
-
-  #Remove matched treatments from comparison pool
-  trimmed_pool <-
-    dplyr::filter(trimmed_pool, !(treat_id %in% just_one$treat_id ))
-
+  
+  # # Prematch. Assign controls to treatments that have just one possible match.
+  # treat_id <- "."; num.controls <- "."; control_id <- "."; time <- "."
+  # difference <- "."; num.assigned <- "."; reshape <- "."; aggregate <- "."
+  # just_one <- trimmed_pool %>%
+  #   dplyr::group_by(treat_id) %>%
+  #   dplyr::summarise(num.controls = n()) %>%
+  #   dplyr::filter(num.controls == 1)
+  # 
+  # matches <- dplyr::bind_rows(matches, trimmed_pool %>%
+  #                               dplyr::filter(treat_id %in% just_one$treat_id))
+  # 
+  # #Remove matched treatments from comparison pool
+  # trimmed_pool <-
+  #   dplyr::filter(trimmed_pool, !(treat_id %in% just_one$treat_id ))
+  
   count <- 1
   # Loop
   repeat {
     # first_choice is the first entry in the comparison pool for each treat_id
     first_choice <- trimmed_pool[!duplicated(trimmed_pool$treat_id), ]
-
+    
     if (nrow(first_choice) == 0)
       break
-
-    # Deal with matches that match in more than one quarter
-    multi_quarter <- aggregate(time ~ control_id, first_choice,
-                               function(x) length(unique(x)))
-    multi_quarter <- multi_quarter[multi_quarter$time > 1, ]
-
-    # Initialize empty multicompare data frame
-    cnames <- c("time", "treat_id", "control_id", "difference")
-    matched_multi_compare <-
-      data.frame(matrix(vector(), 0, 4, dimnames = list(c(), cnames)))
-    # Todo: How to initialize the empty df for matches/matched_multi_compare
-
-    if (nrow(multi_quarter) != 0) {
-
-      multi_compare <-
-        aggregate(difference ~ time + control_id,
-                  first_choice[first_choice$control_id %in%
-                                 multi_quarter$control_id, ], FUN = mean)
-
-      multi_compare <- multi_compare[order(multi_compare$control_id,
-                                           multi_compare$difference), ]
-      multi_compare_assigned <-
-        multi_compare[!duplicated(multi_compare$control_id), ]
-
-      matched_multi_compare <- # Todo - Change to DPLYR
-        merge(multi_compare_assigned, first_choice,
-              by = c("control_id", "time", "difference"))
+    
+    if (replacement == TRUE){
+      # Deal with matches that match in more than one quarter
+      multi_quarter <- aggregate(time ~ control_id, first_choice,
+                                 function(x) length(unique(x)))
+      multi_quarter <- multi_quarter[multi_quarter$time > 1, ]
+      
+      # Initialize empty multicompare data frame
+      cnames <- c("time", "treat_id", "control_id", "difference")
+      matched_multi_compare <-
+        data.frame(matrix(vector(), 0, 4, dimnames = list(c(), cnames)))
+      # Todo: How to initialize the empty df for matches/matched_multi_compare
+      
+      if (nrow(multi_quarter) != 0) {
+        
+        multi_compare <-
+          aggregate(difference ~ time + control_id,
+                    first_choice[first_choice$control_id %in%
+                                   multi_quarter$control_id, ], FUN = mean)
+        
+        multi_compare <- multi_compare[order(multi_compare$control_id,
+                                             multi_compare$difference), ]
+        multi_compare_assigned <-
+          multi_compare[!duplicated(multi_compare$control_id), ]
+        
+        matched_multi_compare <- # Todo - Change to DPLYR
+          merge(multi_compare_assigned, first_choice,
+                by = c("control_id", "time", "difference"))
+      }
+      
+      # Deal with matches in single quarter - these can be assigned directly
+      matched_single_compare <- first_choice[!first_choice$control_id %in%
+                                               multi_quarter$control_id, ]
+      current_matches <- dplyr::bind_rows(matched_multi_compare,
+                                          matched_single_compare)    
+    } else {
+      first_choice <- first_choice[order(first_choice$difference), ]
+      first_choice <- first_choice[!duplicated(first_choice$control_id), ]
+      current_matches <- first_choice[order(first_choice$difference), ]
     }
-
-    # Deal with matches in single quarter - these can be assigned directly
-    matched_single_compare <- first_choice[!first_choice$control_id %in%
-                                             multi_quarter$control_id, ]
-    current_matches <- dplyr::bind_rows(matched_multi_compare,
-                                        matched_single_compare)
-
+    
     # Break out of loop if no matches were assigned
     if (nrow(current_matches) == 0)
       break
-
+    
     matches <- dplyr::bind_rows(matches, current_matches)
-
+    
     if (nrow(trimmed_pool) > 0) {
       #filter out assigned treatment/match pairs
       trimmed_pool <- dplyr::setdiff(trimmed_pool, current_matches)
-
+      
       # Keep records where control_id is not in unique(matches$control_id)
       diff_control_id <-
         dplyr::filter(trimmed_pool,
                       !(control_id %in%
                           unique(current_matches$control_id) ))
-
+      
       if (replacement){
         # if replacement TRUE, keep records where control_id is in
         # matches$control_id and time is the same as the matched time
@@ -318,7 +324,7 @@ createMatches <- function(trimmed_pool, num_matches = 3, replacement=TRUE){
       trimmed_pool <-
         dplyr::arrange(dplyr::bind_rows(diff_control_id, keep),
                        time, treat_id, difference)
-
+      
       # If num_matches matches have been assigned, remove the treatments
       # from the comparison pool
       matches_count <- matches[matches$treat_id %in%
@@ -329,7 +335,7 @@ createMatches <- function(trimmed_pool, num_matches = 3, replacement=TRUE){
       trimmed_pool <-
         dplyr::filter(trimmed_pool,
                       !(treat_id %in% matches_count$treat_id ))
-
+      
     } else break  # break out of loop if comparison pool is empty
     count <- count + 1
   }
