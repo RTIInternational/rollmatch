@@ -126,12 +126,12 @@ runModel <- function(model_type, match_on, reduced_data, id, treat, entry,
 #'
 #' @return Dataframe comparing all treatment and control data
 #' @keywords internal
-createComparison <- function(lr_result, tm, entry, id){
+createComparison <- function(lr_result, tm, entry, id, treat){
   difference <- "."
 
   comparison_pool <-
-    dplyr::inner_join(lr_result[lr_result$treat == 1, ],
-                      lr_result[lr_result$treat == 0, ], by = c(tm))
+    dplyr::inner_join(lr_result[lr_result[[treat]] == 1, ],
+                      lr_result[lr_result[[treat]] == 0, ], by = c(tm))
 
   comparison_pool$difference <- abs(comparison_pool$score.x -
                                       comparison_pool$score.y)
@@ -177,15 +177,15 @@ trimPool <- function(alpha, data_pool, lr_result,
     stop("data_pool is empty")
   }
   if (alpha != 0) {
-    var_treat <- var(lr_result[(lr_result$treat == 1), "score"])
-    var_untreat <- var(lr_result[(lr_result$treat == 0), "score"])
+    var_treat <- var(lr_result[(lr_result[[treat]] == 1), "score"])
+    var_untreat <- var(lr_result[(lr_result[[treat]] == 0), "score"])
 
     if (weighted_pooled_stdev == FALSE){
       pooled_stdev <- sqrt( (var_treat + var_untreat) / 2)
     } else {
       pooled_stdev <-
-        sqrt(( (nrow(lr_result[(lr_result$treat == 1), ]) - 1) * var_treat +
-           (nrow(lr_result[(lr_result$treat == 0), ]) - 1) * var_untreat) /
+        sqrt(( (nrow(lr_result[(lr_result[[treat]] == 1), ]) - 1) * var_treat +
+           (nrow(lr_result[(lr_result[[treat]] == 0), ]) - 1) * var_untreat) /
         (dim(lr_result)[1] - 2))
     }
 
@@ -278,8 +278,8 @@ createMatches <- function(trimmed_pool, num_matches = 3, replacement=TRUE){
           multi_compare[!duplicated(multi_compare$control_id), ]
         
         matched_multi_compare <- # Todo - Change to DPLYR
-          merge(multi_compare_assigned, first_choice,
-                by = c("control_id", "time", "difference"))
+          merge(multi_compare_assigned[, c('time', 'control_id')], first_choice,
+                by = c("control_id", "time")) #, "difference"))
       }
       
       # Deal with matches in single quarter - these can be assigned directly
@@ -292,7 +292,6 @@ createMatches <- function(trimmed_pool, num_matches = 3, replacement=TRUE){
       first_choice <- first_choice[!duplicated(first_choice$control_id), ]
       current_matches <- first_choice[order(first_choice$difference), ]
     }
-    
     # Break out of loop if no matches were assigned
     if (nrow(current_matches) == 0)
       break
@@ -506,7 +505,7 @@ makeOutput <- function(pred_model, lr_result, data_full, matches, orig.call,
                        c("Control", "Treated"))
   out$summary <- nn
 
-  all_ids <- unique(lr_result$indiv_id[lr_result$treat == 1])
+  all_ids <- unique(lr_result$indiv_id[lr_result[[treat]] == 1])
   discarded <- all_ids[ !(all_ids %in% unique(matches$treat_id))]
   out$ids_not_matched <- discarded
   out$total_not_matched <- length(discarded)

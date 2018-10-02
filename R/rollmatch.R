@@ -84,138 +84,138 @@ rollmatch <- function(formula, data, tm, entry, id, lookback = 1, alpha = 0,
                       weighted_pooled_stdev = FALSE, num_matches = 3,
                       match_on = "logit", model_type = "logistic",
                       replacement=TRUE) {
-
+  
   ############################################################################
-
+  
   if (is.language(formula) == FALSE){
     stop("'formula' input parameter must be of type 'language'")
   }
-
+  
   if (is.data.frame(data) == FALSE){
     stop("'data' input parameter must be a data.frame")
   }
-
+  
   if (is.character(tm) == FALSE){
     stop("'tm' input parameter must be a string")
   }
-
+  
   try_tm <- try(data[tm], silent = TRUE)
   if (class(try_tm) == "try-error"){
     stop("'tm' input parameter must be a column in the data.frame")
   }
-
+  
   if (all(data[tm] == floor(data[tm])) == FALSE){
     stop("'tm' input variable must resolve to a vector of whole numbers")
   }
-
+  
   if (all(data[tm] > 0) == FALSE){
     stop("'tm' input variable must resolve to a vector of positive numbers")
   }
-
+  
   if (is.character(entry) == FALSE){
     stop("'entry' input parameter must be a string")
   }
-
+  
   try_entry <- try(data[entry], silent = TRUE)
   if (class(try_entry) == "try-error"){
     stop("'entry' input parameter must be a column in the data.frame")
   }
-
+  
   if (all(data[entry] == floor(data[entry])) == FALSE){
     stop("'entry' input variable must resolve to a vector of whole numbers")
   }
-
+  
   if (all(data[entry] > 0) == FALSE){
     stop("'entry' input variable must resolve to a vector of positive numbers")
   }
-
+  
   if (is.character(id) == FALSE){
     stop("'id' input parameter must be a string")
   }
-
+  
   try_id <- try(data[id], silent = TRUE)
   if (class(try_id) == "try-error"){
     stop("'id' input parameter must be a column in the data.frame")
   }
-
+  
   if (is.numeric(lookback) == FALSE){
     stop("'lookback' input parameter must be of type numeric")
   }
-
+  
   if ( (lookback == floor(lookback)) == FALSE){
     stop("'lookback' input parameter must be a whole number")
   }
-
+  
   if (between(lookback, 1, 10) == FALSE){
     stop("'lookback' input parameter must be between 1 and 10")
   }
-
+  
   if (lookback > max(data[entry])){
     stop("'lookback' is greater than number of time periods in data set")
   }
-
+  
   if (is.numeric(alpha) == FALSE){
     stop("'alpha' input parameter must be numeric")
   }
-
+  
   if (alpha < 0){
     stop("'alpha' input parameter must be a positive number")
   }
-
+  
   if (is.logical(weighted_pooled_stdev) == FALSE){
     stop("'weighted_pooled_stdev' input parameter must be of type 'logical'")
   }
-
+  
   if (is.numeric(num_matches) == FALSE){
     stop("'num_matches' input parameter must be numeric")
   }
-
+  
   if ( (num_matches == floor(num_matches)) == FALSE){
     stop("'num_matches' input parameter must be a whole number")
   }
-
+  
   if (num_matches < 0){
     stop("'num_matches' input parameter must be a positive number")
   }
-
+  
   if (is.logical(replacement) == FALSE){
     stop("'replacement' input parameter must be of type 'logical'")
   }
-
+  
   orig.call <- match.call()
-
+  
   vars <- all.vars(formula)
   # get treatment variable from formula
   treat <- vars[1]
-
+  
   # Set up reduced treatment and comparison set.
   treat_set <- data[data[[treat]] == 1 &
                       (data[[tm]] == data[[entry]] - lookback), ]
   comp_set  <- data[data[[treat]] == 0 &
                       (data[[tm]] %in% unique(treat_set[[tm]])), ]
   reduced_data <- dplyr::bind_rows(treat_set, comp_set)
-
+  
   # Convert Columns to Factor
   reduced_data <- chr_2_factor(reduced_data, vars)
-
+  
   # Run model and save output
   model_output <- runModel(model_type, match_on, reduced_data, id, treat, entry,
-                     tm, formula)
-
+                           tm, formula)
+  
   #w <- tryCatch(runModel(model_type, match_on, reduced_data, id,
   #                                 treat, entry,tm, formula),
   #                        warning = function(w) w)
-
+  
   lr_result <- model_output$lr_result
   pred_model <- model_output$pred_model
-
+  
   # Create pool of possible matches
-  comparison_pool <- createComparison(lr_result, tm, entry, id)
+  comparison_pool <- createComparison(lr_result, tm, entry, id, treat)
   # Trim pool based on specified caliper
   trimmed_pool <- trimPool(alpha = alpha, data_pool = comparison_pool,
                            lr_result = lr_result,
                            weighted_pooled_stdev = weighted_pooled_stdev)
-
+  
   # Using matching algorithm to find top matches
   matches <- createMatches(trimmed_pool, num_matches, replacement)
   # Add additional clmns: total_matches, treatment_weight, control_matches
@@ -232,6 +232,6 @@ rollmatch <- function(formula, data, tm, entry, id, lookback = 1, alpha = 0,
                          treat, matches)
   # Set the class
   class(out) <- "rem"
-
+  
   return(out)
 }
