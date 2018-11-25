@@ -61,8 +61,9 @@
 #'
 #' formula <- as.formula(treat ~ qtr_pmt + yr_pmt + age)
 #'
-#' r_match <- rollmatch(formula, data = rem_synthdata_small, tm = "quarter",
-#'                        entry = "entry_q", id = "indiv_id", alpha = 0.2)
+#' r_match <- rollmatch(formula, data = rem_synthdata_small, treat = "treat",
+#'                        tm = "quarter", entry = "entry_q", id = "indiv_id",
+#'                        alpha = 0.2)
 #'
 #' r_match
 #'
