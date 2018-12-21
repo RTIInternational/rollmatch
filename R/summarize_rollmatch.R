@@ -1,4 +1,4 @@
-summary.rollmatch <- function(wrkr){
+summarize_rollmatch <- function(wrkr){
   cat("\nSummary:\n")
   print.table(wrkr$summary)
   cat("\n")
