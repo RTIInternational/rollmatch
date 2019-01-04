@@ -2,25 +2,22 @@
 % Please edit documentation in R/run_checks.R
 \name{run_checks_one}
 \alias{run_checks_one}
-\title{Run checks on variable inputs 
-As it's an internal helper function to aid in testing,
-it is not exported for use outside of the package.}
+\title{Run checks on variable inputs}
 \usage{
-run_checks_one(data, tm, entry, id)
+run_checks_one(data, treat, tm, entry, id)
 }
 \arguments{
-\item{data}{dataset whose columns match the other parameters}
+\item{data}{See rollmatch()}
 
-\item{tm}{The time period indicator}
+\item{treat}{See rollmatch()}
 
-\item{entry}{The time period in which the participant enrolled in the
-intervention (in the same units as the tm variable).}
+\item{tm}{See rollmatch()}
 
-\item{id}{The individual id variable.}
+\item{entry}{See rollmatch()}
+
+\item{id}{See rollmatch()}
 }
 \description{
-Run checks on variable inputs 
-As it's an internal helper function to aid in testing,
-it is not exported for use outside of the package.
+Run checks on variable inputs
 }
 \keyword{internal}

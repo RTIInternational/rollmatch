@@ -4,33 +4,31 @@
 \alias{trim_pool}
 \title{Use a caliper to trim the data to only observations within threshold}
 \usage{
-trim_pool(alpha, data_pool, scored_data, treat,
-  weighted_pooled_stdev = FALSE)
+trim_pool(alpha, comparison_pool, scored_data, treat, tm,
+  standard_deviation = "average")
 }
 \arguments{
-\item{alpha}{The pre-specified distance within which to allow matching.
-The caliper width is calculated as the \code{alpha} multiplied by the
-pooled standard deviation of the propensity scores or the logit of the
-propensity scores - depending on the value of \code{match_on}.}
+\item{alpha}{See rollmatch()}
 
-\item{data_pool}{Dataframe of comparison data to be trimmed.}
+\item{comparison_pool}{Dataframe of comparison data to be trimmed from
+compare_pool()}
 
-\item{scored_data}{Dataframe of results from model in runModel.}
+\item{scored_data}{Dataframe of results from score_data()}
 
-\item{weighted_pooled_stdev}{Boolean. FALSE for average pooled standard
-deviation and TRUE for weighted pooled standard deviation.}
+\item{treat}{See rollmatch()}
+
+\item{tm}{See rollmatch()}
+
+\item{standard_deviaion}{See rollmatch()
+
+\dontrun{ 
+print('See add_balance_table for full example')
+}}
 }
 \value{
 Dataframe of the trimmed comparisons based on the alpha value
 }
 \description{
 Use a caliper to trim the data to only observations within threshold
-}
-\examples{
-\dontrun{ 
-# As these functions are hidden, we only provided one example.
-# See add_balance_table function in the utility_functions file.
-}
-                         
 }
 \keyword{internal}

@@ -2,47 +2,28 @@
 % Please edit documentation in R/run_checks.R
 \name{run_checks_two}
 \alias{run_checks_two}
-\title{Run checks on variable inputs 
-As it's an internal helper function to aid in testing,
-it is not exported for use outside of the package.}
+\title{Run checks on variable inputs}
 \usage{
-run_checks_two(data, alpha, weighted_pooled_stdev, num_matches,
-  replacement)
+run_checks_two(data, alpha, standard_deviation, num_matches, replacement)
 }
 \arguments{
-\item{data}{dataset whose columns match the other parameters}
+\item{data}{See rollmatch()}
 
-\item{alpha}{Part of the pre-specified distance within which to allow
-matching. The caliper width is calculated as the \code{alpha} multiplied by
-the pooled standard deviation of the propensity scores or the logit of the
-propensity scores - depending on the value of \code{match_on}.}
+\item{alpha}{See rollmatch()}
 
-\item{weighted_pooled_stdev}{Option that allows for weighted pooled standard
-deviation for caliper matching. FALSE for average pooled standard
-deviation and TRUE for weighted pooled standard deviation.}
+\item{num_matches}{See rollmatch()}
 
-\item{num_matches}{The number of comparison beneficiary matches to attempt
-to assign to each treatment beneficiary}
+\item{replacement}{See rollmatch()}
 
-\item{replacement}{Assign comparison beneficiaries with replacement (TRUE)
-or without replacement (FALSE). If \code{replacement} is TRUE, then
-comparison beneficiaries will be allowed to be used with replacement within
-a single quarter, but will not be allowed to match to different treatment
-beneficiaries across multiple quarters.}
+\item{lookback}{See rollmatch()}
 
-\item{lookback}{The number of time periods to look back before the
-time period of enrollment (1-10).}
+\item{standard_deviaion}{See rollmatch()}
 
-\item{match_on}{Match on estimated propensity score ("pscore") or logit of
-estimated propensity score ("logit").}
+\item{match_on}{See score_data()}
 
-\item{model_type}{Use logistic regression ("logistic") or "probit"
-regression ("probit") to estimate the predicted probability of participating
-in the innovation.}
+\item{model_type}{See score_data()}
 }
 \description{
-Run checks on variable inputs 
-As it's an internal helper function to aid in testing,
-it is not exported for use outside of the package.
+Run checks on variable inputs
 }
 \keyword{internal}

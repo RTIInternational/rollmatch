@@ -2,19 +2,14 @@
 % Please edit documentation in R/run_checks.R
 \name{check_lookback}
 \alias{check_lookback}
-\title{Run checks on variable lookback
-As it's an internal helper function to aid in testing,
-it is not exported for use outside of the package.}
+\title{Run checks on variable lookback}
 \usage{
 check_lookback(data, lookback, entry)
 }
 \arguments{
-\item{lookback}{The number of time periods to look back before the
-time period of enrollment (1-10).}
+\item{lookback}{See rollmatch()}
 }
 \description{
 Run checks on variable lookback
-As it's an internal helper function to aid in testing,
-it is not exported for use outside of the package.
 }
 \keyword{internal}

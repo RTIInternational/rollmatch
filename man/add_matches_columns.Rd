@@ -2,8 +2,7 @@
 % Please edit documentation in R/utility_functions.R
 \name{add_matches_columns}
 \alias{add_matches_columns}
-\title{Create additional columns for the matches dataset
-As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
+\title{Create additional columns for the matches dataset}
 \usage{
 add_matches_columns(matches)
 }
@@ -15,12 +14,10 @@ Dataframe containing top matches
 }
 \description{
 Create additional columns for the matches dataset
-As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
 }
 \examples{
 \dontrun{ 
-# As these functions are hidden, we only provided one example.
-# See add_balance_table function in the utility_functions file.
+print('See add_balance_table for full example')
 }
 
 }

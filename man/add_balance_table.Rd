@@ -2,39 +2,35 @@
 % Please edit documentation in R/utility_functions.R
 \name{add_balance_table}
 \alias{add_balance_table}
-\title{Add the balancing table to the final output
-As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
+\title{Add the balancing table to the final output}
 \usage{
-add_balance_table(reduced_data, vars, tm, id, combined_output, treat,
+add_balance_table(scored_data, vars, tm, id, combined_output, treat,
   matches)
 }
 \arguments{
-\item{reduced_data}{Dataframe of reduced treatment and comparison data}
+\item{scored_data}{The dataframe from score_data()}
 
-\item{vars}{A vector of dataframe column names}
+\item{vars}{See rollmatch()}
 
-\item{tm}{The time period indicator}
+\item{tm}{See rollmatch()}
 
-\item{id}{ID variable in dataset}
+\item{id}{See rollmatch()}
 
 \item{combined_output}{A list of output for the rollmatch package. 
-See makeOutput}
+See make_output}
 
-\item{treat}{The Treatment variable}
+\item{treat}{See rollmatch()}
 
 \item{matches}{Dataframe containing the matches from comparison_pool}
 }
 \value{
-\code{output} returns a list containing the following additional
-component to the list out:
+\code{output} returns a list with the additional output:
 \item{balance}{The balancing table.}
 }
 \description{
 Add the balancing table to the final output
-As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
 }
 \examples{
-\dontrun{ 
 data(package="rollmatch", "rem_synthdata_small")
 reduced_data <- reduce_data(data = rem_synthdata_small, treat = "treat",
                             tm = "quarter", entry = "entry_q",
@@ -44,27 +40,25 @@ vars <- all.vars(fm)
 scored_data <- score_data(model_type = "logistic", match_on = "logit", fm = fm,
                           reduced_data = reduced_data, treat = "treat",
                           tm = "quarter", entry = "entry_q", id = "indiv_id")
-comparison_pool <- create_comparison(scored_data, treat = "treat",
-                                     tm = "quarter", entry = "entry_q",
-                                     id = "indiv_id")
-trimmed_pool <- trim_pool(alpha = .2, data_pool = comparison_pool,
-                          treat = "treat", scored_data = scored_data)
-matches <- create_matches(trimmed_pool = trimmed_pool, num_matches = 3,
-                          replacement = TRUE)
+comparison_pool <- compare_pool(scored_data, treat = "treat",
+                                tm = "quarter", entry = "entry_q",
+                                id = "indiv_id")
+trimmed_pool <- trim_pool(alpha = .2, comparison_pool = comparison_pool,
+                          scored_data = scored_data, treat = "treat",
+                          tm = "quarter", standard_deviation = 'average')
+matches <- create_matches(trimmed_pool = trimmed_pool, tm = "quarter",
+                          num_matches = 3, replacement = TRUE)
 matches <- add_matches_columns(matches)
-first_output <- create_weights(matches = matches, data = rem_synthdata_small,
-                               id = "indiv_id")
 combined_output <- make_output(scored_data = scored_data,
-                               data_full = first_output$data_full,
-                               matches = first_output$matches,
+                               data = rem_synthdata_small,
+                               matches = matches,
                                treat = "treat", tm = "quarter",
-                               entry = "entry_q", lookback = 1)
+                               entry = "entry_q", id = "indiv_id", lookback = 1)
 # Add balance table to the output
-output <- add_balance_table(reduced_data = reduced_data, vars = vars,
+output <- add_balance_table(scored_data = scored_data, vars = vars,
                             tm = "quarter", id = "indiv_id",
                             combined_output = combined_output,
-                            treat = "treat", matches = first_output$matches)
-}
+                            treat = "treat", matches = matches)
 
 }
 \keyword{internal}

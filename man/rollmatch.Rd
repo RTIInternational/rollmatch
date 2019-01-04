@@ -4,61 +4,69 @@
 \alias{rollmatch}
 \title{Rolling entry matching}
 \usage{
-rollmatch(scored_data, data_full, treat, tm, entry, id, vars, alpha = 0,
-  weighted_pooled_stdev = FALSE, num_matches = 3, replacement = TRUE)
+rollmatch(scored_data, data, treat, tm, entry, id, vars, lookback,
+  alpha = 0, standard_deviation = "average", num_matches = 3,
+  replacement = TRUE)
 }
 \arguments{
-\item{scored_data}{Input data with propensity scores labeled "score"}
+\item{scored_data}{Output from scored_data() or the output from
+reduce_data() with propensity scores labeled "score".}
 
-\item{data_full}{The original dataset before reduce_data() was ran}
+\item{data}{Original dataset before reduce_data() was ran.}
 
-\item{tm}{The time period indicator.}
+\item{treat}{String for name of treatment variable in data.}
 
-\item{entry}{The time period in which the participant enrolled in the
-intervention (in the same units as the tm variable).}
+\item{tm}{String for time period indicator variable name in data.}
 
-\item{id}{The individual id variable.}
+\item{entry}{String for name of time period in which the participant
+enrolled in the intervention (in the same units as the tm variable).}
 
-\item{vars}{The column names used in the propensity score algorithm}
+\item{id}{String for individual id variable name in data.}
+
+\item{vars}{Vector of column names used in the propensity score algorithm.
+This is used when creating the balance table.}
+
+\item{lookback}{The number of time periods to look back before the
+time period of enrollment (1-...).}
 
 \item{alpha}{Part of the pre-specified distance within which to allow
-matching. The caliper width is calculated as the \code{alpha} multiplied by the
-pooled standard deviation of the propensity scores or the logit of the
+matching. The caliper width is calculated as the \code{alpha} multiplied by
+the pooled standard deviation of the propensity scores or the logit of the
 propensity scores - depending on the value of \code{match_on}.}
 
-\item{weighted_pooled_stdev}{Option that allows for weighted pooled standard
-deviation for caliper matching. FALSE for average pooled standard
-deviation and TRUE for weighted pooled standard deviation.}
+\item{standard_deviation}{String. 'average' for average pooled standard
+deviation, 'weighted' for weighted pooled standard deviation, and
+'None' to not use a standard deviation multiplication. Default is "average".}
 
-\item{num_matches}{The number of comparison beneficiary matches to attempt
-to assign to each treatment beneficiary}
+\item{num_matches}{Number of comparison beneficiary matches to attempt
+to assign to each treatment beneficiary. Default is 3.}
 
 \item{replacement}{Assign comparison beneficiaries with replacement (TRUE)
 or without replacement (FALSE). If \code{replacement} is TRUE, then
 comparison beneficiaries will be allowed to be used with replacement within
 a single quarter, but will not be allowed to match to different treatment
-beneficiaries across multiple quarters.}
-
-\item{match_on}{Match on estimated propensity score ("pscore") or logit of
-estimated propensity score ("logit").}
-
-\item{model_type}{Use logistic regression ("logistic") or "probit"
-regression ("probit") to estimate the predicted probability of participating
-in the innovation.}
+beneficiaries across multiple quarters. Default is TRUE.}
 }
 \value{
 \code{rollmatch} returns an object of class "rollmatch".
 
 An object of class "rollmatch" is a list containing the following components:
 \item{model}{The output of the model used to estimate the distance measure.}
-\item{scores}{The propensity score and logit of the propensity score. }
-\item{data}{The original dataset with matches, scores, and weights applied.}
-\item{summary}{A basic summary table.}
-\item{balance}{The balancing table.}
+\item{scores}{The propensity scores used in the matching algorithm. }
+\item{data}{The original dataset with matches added.}
+\item{summary}{A basic summary table with counts of matched and unmatched
+data.}
+\item{ids_not_matched}{A vector of the treatment IDs that were not matched.}
+\item{total_not_matched}{The number of treatment IDs not matched.}
+\item{matched_data}{The unique matches with scores, matching information,
+and the weights of the individuals}
+
+\item{balance}{A balancing table. Table is broken down by variable that is 
+specified in the vars vector.}
 }
 \description{
-\code{rollmatch} is the main function of the rollmatch package
-\emph{<rollmatch>}, which implements a comparison group selection
+\code{rollmatch} is the last of 3 main function in the rollmatch package
+\emph{<rollmatch>} implements a comparison group selection
 methodology for interventions with rolling participant entry over time.
 A difficulty in evaluating rolling entry interventions is that a suitable
 "entry" date is not observed for non-participants. This method, called
@@ -69,8 +77,8 @@ participant's specific entry period, rather than using data from a fixed
 pre-intervention period.
 }
 \details{
-Rolling entry matching requires three preliminary steps. This package will 
-assist the user in steps 2 and three. First, a quasi-panel dataset
+Rolling entry matching requires preliminary steps. This package will 
+assist the user in steps 2 and 3. First, a quasi-panel dataset
 is constructed containing multiple observations of non-participants (one for
 each entry period). Participants enter the data once in the baseline period
 immediately preceding their unique entry into the intervention. Time-varying
@@ -79,10 +87,10 @@ each entry period's non-participant observations. The user of rollmatch
 is expected to have already created this quasi-panel dataset. Second, the
 pool of potential comparisons for each participant is restricted to those
 that have the same "entry period" into the intervention
-(see function "reduceData"). Finally, a predicted
+(see function "reduce_data"). Finally, a predicted
 probability of treatment is obtained for participants and non-participants
 (e.g. through propensity score matching). The user can use function
-"calcScores" to complete this step, or create use their own propensity score 
+"score_data" to complete this step, or create use their own propensity score 
 calculation.
 
 The final step consists of the matching algorithm. The algorithm selects
@@ -92,18 +100,20 @@ function "rollmatch".
 }
 \examples{
 data(package="rollmatch", "rem_synthdata_small")
-
 reduced_data <- reduce_data(data = rem_synthdata_small, treat = "treat",
                             tm = "quarter", entry = "entry_q",
                             id = "indiv_id", lookback = 1)
-                            
-                            
-formula <- as.formula(treat ~ qtr_pmt + yr_pmt + age)
-
-r_match <- rollmatch(formula, data = rem_synthdata_small, treat = "treat",
-                       tm = "quarter", entry = "entry_q", id = "indiv_id",
-                       alpha = 0.2)
-
-r_match
+fm <- as.formula(treat ~ qtr_pmt + yr_pmt + age)
+vars <- all.vars(fm)
+scored_data <- score_data(reduced_data = reduced_data,
+                          model_type = "logistic", match_on = "logit",
+                          fm = fm, treat = "treat",
+                          tm = "quarter", entry = "entry_q", id = "indiv_id")
+output <- rollmatch(scored_data, data=rem_synthdata_small, treat = "treat",
+                    tm = "quarter", entry = "entry_q", id = "indiv_id",
+                    vars = vars, lookback = 1, alpha = .2,
+                    standard_deviation = "average", num_matches = 3,
+                    replacement = TRUE)
+output
 
 }

@@ -2,35 +2,29 @@
 % Please edit documentation in R/utility_functions.R
 \name{create_matches}
 \alias{create_matches}
-\title{Algorithm to find best matches from the comparison pool
-As it's an internal helper function to aid in testing, it is not exported for use outside of the package.}
+\title{Algorithm to find best matches from the comparison pool}
 \usage{
-create_matches(trimmed_pool, num_matches = 3, replacement = TRUE)
+create_matches(trimmed_pool, tm, num_matches = 3, replacement = TRUE)
 }
 \arguments{
-\item{num_matches}{Integer. the number of comparison beneficiary matches to
-attempt to assign to each treatment beneficiary}
-
-\item{replacement}{Boolean. Assign comparison beneficiaries with replacement
-(TRUE) or without replacement (FALSE). If \code{replacement} is TRUE, then
-comparison beneficiaries will be allowed to be used with replacement within
-a single quarter, but will be allowed to match to different treatment
-beneficiaries across multiple quarters.}
-
-\item{comparison_pool}{Dataframe containing the pool from which matches
+\item{trimmed_pool}{Dataframe containing the pool from which matches
 should be found}
+
+\item{tm}{See rollmatch()}
+
+\item{num_matches}{See rollmatch()}
+
+\item{replacement}{See rollmatch()}
 }
 \value{
 Dataframe containing top matches
 }
 \description{
 Algorithm to find best matches from the comparison pool
-As it's an internal helper function to aid in testing, it is not exported for use outside of the package.
 }
 \examples{
 \dontrun{ 
-# As these functions are hidden, we only provided one example.
-# See add_balance_table function in the utility_functions file.
+print('See add_balance_table for full example')
 }
 
 }

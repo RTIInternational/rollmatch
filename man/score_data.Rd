@@ -4,31 +4,35 @@
 \alias{score_data}
 \title{Run a logistic or probit model}
 \usage{
-score_data(model_type, match_on, fm, reduced_data, treat, tm, entry, id)
+score_data(reduced_data, model_type, match_on, fm, treat, tm, entry, id)
 }
 \arguments{
+\item{reduced_data}{Dataframe of reduced treatment and comparison data.
+See output of reduce_data().}
+
 \item{model_type}{Use logistic regression ("logistic") or "probit"
 regression ("probit") to estimate the predicted probability of participating}
 
 \item{match_on}{Match on estimated propensity score ("pscore") or logit of
 estimated propensity score ("logit").}
 
-\item{reduced_data}{Dataframe of reduced treatment and comparison data}
-
-\item{tm}{The time period indicator.}
-
-\item{entry}{Entry quarter variable in dataset}
-
-\item{id}{ID variable in dataset}
-
-\item{formula}{A \code{\link[stats]{formula}} in the form
+\item{fm}{A \code{\link[stats]{formula}} in the form
 \code{treat ~ x1 + x2 ...} where \code{treat} is a binary treatment
 indicator (Treat = 1, Control = 0) and \code{x1} and \code{x2} are
 pre-treatment covariates. Both the treatment indicator and
 pre-treatment covariates must be contained in the input dataset.}
+
+\item{treat}{String for name of treatment variable in data.}
+
+\item{tm}{String for time period indicator variable name in data.}
+
+\item{entry}{String for name of time period in which the participant
+enrolled in the intervention (in the same units as the tm variable).}
+
+\item{id}{String for individual id variable name in data.}
 }
 \value{
-A dataframe with added propensity scores
+A copy of reduced_data input with added propensity scores
 }
 \description{
 Run a logistic or probit model
@@ -40,10 +44,10 @@ fm <- as.formula(treat ~ qtr_pmt + age + is_male + is_white)
 reduced_data <- reduce_data(data = rem_synthdata_small, treat = "treat",
                             tm = "quarter", entry = "entry_q",
                             id = "indiv_id", lookback = 1)
-scored_data <- score_data(model_type = "logistic", match_on = "logit",
-                          fm = fm, reduced_data = reduced_data,
-                          treat = "treat", tm = "quarter", entry = "entry_q",
-                          id = "indiv_id")
+scored_data <- score_data(reduced_data = reduced_data,
+                          model_type = "logistic", match_on = "logit",
+                          fm = fm, treat = "treat", tm = "quarter",
+                          entry = "entry_q", id = "indiv_id")
 head(scored_data)
 }
 

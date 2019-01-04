@@ -7,24 +7,23 @@
 reduce_data(data, treat, tm, entry, id, lookback = 1)
 }
 \arguments{
-\item{data}{The input panel dataset.}
+\item{data}{Original dataset before reduce_data() was ran.}
 
-\item{treat}{The treatment indentifier (should contain 0's and 1's)}
+\item{treat}{String for name of treatment variable in data.}
 
-\item{tm}{The time period indicator.}
+\item{tm}{String for time period indicator variable name in data.}
 
-\item{entry}{The time period in which the participant enrolled in the
-intervention (in the same units as the tm variable).}
+\item{entry}{String for name of time period in which the participant
+enrolled in the intervention (in the same units as the tm variable).}
 
-\item{id}{The individual id variable. This is required because reduced_data
-must have an id column}
+\item{id}{String for individual id variable name in data.}
 
 \item{lookback}{The number of time periods to look back before the
-time period of enrollment (1-10).}
+time period of enrollment (1-...).}
 }
 \value{
 \code{reduced_data} returns a dataset of reduced data ready
-for propensity scoring
+for propensity scoring and to use in the function score_data()
 }
 \description{
 Preprocessing Step to Rolling Entry Matching
@@ -32,8 +31,8 @@ Preprocessing Step to Rolling Entry Matching
 \examples{
 data(package="rollmatch", "rem_synthdata_small")
 reduced_data <- reduce_data(data = rem_synthdata_small, treat = "treat",
-                            tm = "quarter", entry = "entry_q", id = "indiv_id",
-                            lookback = 1)
+                            tm = "quarter", entry = "entry_q",
+                            id = "indiv_id", lookback = 1)
 reduced_data
 
 }
