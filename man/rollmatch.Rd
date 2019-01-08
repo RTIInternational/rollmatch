@@ -53,16 +53,17 @@ beneficiaries across multiple quarters. Default is TRUE.}
 An object of class "rollmatch" is a list containing the following components:
 \item{model}{The output of the model used to estimate the distance measure.}
 \item{scores}{The propensity scores used in the matching algorithm. }
-\item{data}{The original dataset with matches added.}
+\item{data}{The original dataset with all matches added.}
 \item{summary}{A basic summary table with counts of matched and unmatched
 data.}
 \item{ids_not_matched}{A vector of the treatment IDs that were not matched.}
 \item{total_not_matched}{The number of treatment IDs not matched.}
-\item{matched_data}{The unique matches with scores, matching information,
+\item{matched_data}{R data.frame of matches with scores, matching information,
 and the weights of the individuals}
 
-\item{balance}{A balancing table. Table is broken down by variable that is 
-specified in the vars vector.}
+\item{balance}{table showing the full treatment, full control, matched
+treatment, and matched comparison group means and standard deviations for
+the variables used in the model.}
 }
 \description{
 \code{rollmatch} is the last of 3 main function in the rollmatch package

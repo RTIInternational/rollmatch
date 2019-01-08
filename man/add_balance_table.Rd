@@ -31,6 +31,7 @@ See make_output}
 Add the balancing table to the final output
 }
 \examples{
+\dontrun{
 data(package="rollmatch", "rem_synthdata_small")
 reduced_data <- reduce_data(data = rem_synthdata_small, treat = "treat",
                             tm = "quarter", entry = "entry_q",
@@ -59,6 +60,7 @@ output <- add_balance_table(scored_data = scored_data, vars = vars,
                             tm = "quarter", id = "indiv_id",
                             combined_output = combined_output,
                             treat = "treat", matches = matches)
+}
 
 }
 \keyword{internal}

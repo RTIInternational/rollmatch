@@ -252,6 +252,7 @@ create_matches <- function(trimmed_pool, tm, num_matches = 3,
 #' @return Dataframe containing top matches
 #' @keywords internal
 add_matches_columns <- function(matches){
+  control_id <- ""; treatment_weight <- "";
   # Assign a number to the matches.  1st, 2nd 3rd, ...
   matches$match_rank <- ave(1:nrow(matches), matches$treat_id, FUN = seq_along)
   matches <- matches[order(matches$treat_id, matches$match_rank), ]
@@ -346,6 +347,7 @@ make_output <- function(scored_data, data, matches,
 #' @param matches Dataframe containing the matches from comparison_pool
 #' 
 #' @examples
+#' \dontrun{
 #' data(package="rollmatch", "rem_synthdata_small")
 #' reduced_data <- reduce_data(data = rem_synthdata_small, treat = "treat",
 #'                             tm = "quarter", entry = "entry_q",
@@ -374,6 +376,7 @@ make_output <- function(scored_data, data, matches,
 #'                             tm = "quarter", id = "indiv_id",
 #'                             combined_output = combined_output,
 #'                             treat = "treat", matches = matches)
+#' }
 #' 
 #' @return \code{output} returns a list with the additional output:
 #' \item{balance}{The balancing table.}
