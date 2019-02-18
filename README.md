@@ -12,6 +12,8 @@ rollmatch <img src="man/figures/200px-Rti-logo.png" align="right" />
 
 This method, called Rolling Entry Matching, assigns potential comparison non-participants multiple counterfactual entry periods which allows for matching of participant and non-participants based on data immediately preceding each participant's specific entry period, rather than using data from a fixed pre-intervention period.
 
+* For more information on the method, please reference ![Witman et al. 2018](https://onlinelibrary.wiley.com/doi/abs/10.1111/1475-6773.13086)
+
 ### Video
 
 [![Watch the Intro Video](https://img.youtube.com/vi/_U1bDrL_f-M/0.jpg)](https://www.youtube.com/watch?v=_U1bDrL_f-M)
@@ -36,15 +38,30 @@ library(rollmatch)
 # Load sample dataset
 data(package="rollmatch", "rem_synthdata_small")
 
-# Choose confounding variables hypothesized to be associated with both treatment and outcome
-formula <- as.formula(treat ~ qtr_pmt + yr_pmt + age)
+# Reduce the input dataset size, for matching 
+reduced_data <- reduce_data(data = rem_synthdata_small, treat = "treat",
+                            tm = "quarter", entry = "entry_q",
+                            id = "indiv_id", lookback = 1)
 
-# Run rollmatch
-r_match <- rollmatch(formula, data = rem_synthdata_small, tm = "quarter",
-                       entry = "entry_q", id = "indiv_id", alpha = 0.2)
+# Choose confounding variables hypothesized to be associated with both treatment and outcome
+fm <- as.formula(treat ~ qtr_pmt + yr_pmt + age)
+vars <- all.vars(fm)
+
+# Calculate propensity socres for the reduced data
+scored_data <- score_data(reduced_data = reduced_data,
+                          model_type = "logistic", match_on = "logit",
+                          fm = fm, treat = "treat",
+                          tm = "quarter", entry = "entry_q", id = "indiv_id")
+
+# Run the rolling entry matching algorithm
+output <- rollmatch(scored_data, data=rem_synthdata_small, treat = "treat",
+                    tm = "quarter", entry = "entry_q", id = "indiv_id",
+                    vars = vars, lookback = 1, alpha = .2,
+                    standard_deviation = "average", num_matches = 3,
+                    replacement = TRUE)
 
 # View output matches and diagnostics
-r_match
+output
 ```
 
 
