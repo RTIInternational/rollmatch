@@ -19,16 +19,18 @@ compare_pool()}
 
 \item{tm}{See rollmatch()}
 
-\item{standard_deviaion}{See rollmatch()
-
-\dontrun{ 
-print('See add_balance_table for full example')
-}}
+\item{standard_deviaion}{See rollmatch()}
 }
 \value{
 Dataframe of the trimmed comparisons based on the alpha value
 }
 \description{
 Use a caliper to trim the data to only observations within threshold
+}
+\examples{
+\dontrun{ 
+print('See add_balance_table for full example')
+}
+                         
 }
 \keyword{internal}

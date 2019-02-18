@@ -74,6 +74,7 @@ compare_pool <- function(scored_data, treat, tm, entry, id){
 #' @param tm See rollmatch()
 #' @param standard_deviaion See rollmatch()
 #' 
+#' @examples
 #' \dontrun{ 
 #' print('See add_balance_table for full example')
 #' }
