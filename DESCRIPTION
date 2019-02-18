@@ -1,7 +1,7 @@
 Package: rollmatch
 Title: Rolling Entry Matching
-Version: 1.0.1
-Date: 2018-05-07
+Version: 2.0.1
+Date: 2019-01-02
 Author: Rob Chew [aut, cre], Kasey Jones [aut, cre], Mahin Manley [aut], Allison Witman [res], Chris Beadles [res], Yiyan Liu [res], Ann Larson [res]
 Maintainer: Rob Chew <rchew@rti.org>
 Description: Functions to perform propensity score matching on rolling entry interventions for which a suitable "entry" date is not observed for nonparticipants. For more details, please reference Witman, Beadles, Hoerger, Liu, Kafali, Gandhi, Amico, and Larsen (2016) <https://academyhealth.confex.com/academyhealth/2016arm/meetingapp.cgi/Paper/9375>.
@@ -11,7 +11,8 @@ Depends:
     R (>= 3.0.2)
 Imports:
     dplyr (>= 0.5.0),
-    magrittr (>= 1.5.0)
+    magrittr (>= 1.5.0),
+    stats
 Suggests:
     testthat (>= 1.0.2)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
