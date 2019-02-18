@@ -7,7 +7,7 @@
 #' @return Dataframe where all character variables are now factors
 #' 
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' df <- data.frame(x = 1:3, y = 3:1, z = c("a", "b", "c"),
 #'                  stringsAsFactors = FALSE)
 #' fm <- as.formula(x ~ y + z)
@@ -40,7 +40,7 @@ change_to_factor <- function(df, vars){
 #' @param id See rollmatch()
 #' 
 #' @examples
-#' \dontrun{ 
+#' \donttest{ 
 #' print('See add_balance_table for full example')
 #' }
 #'
@@ -75,7 +75,7 @@ compare_pool <- function(scored_data, treat, tm, entry, id){
 #' @param standard_deviaion See rollmatch()
 #' 
 #' @examples
-#' \dontrun{ 
+#' \donttest{ 
 #' print('See add_balance_table for full example')
 #' }
 #'                          
@@ -130,7 +130,7 @@ trim_pool <- function(alpha, comparison_pool, scored_data, treat, tm,
 #' @param replacement See rollmatch()
 #' 
 #' @examples
-#' \dontrun{ 
+#' \donttest{ 
 #' print('See add_balance_table for full example')
 #' }
 #'
@@ -246,7 +246,7 @@ create_matches <- function(trimmed_pool, tm, num_matches = 3,
 #' @param Matches Dataframe containing the matches from comparison_pool
 #' 
 #' @examples
-#' \dontrun{ 
+#' \donttest{ 
 #' print('See add_balance_table for full example')
 #' }
 #'
@@ -288,7 +288,7 @@ add_matches_columns <- function(matches){
 #' @param lookback See rollmatch()
 #' 
 #' @examples
-#' \dontrun{ 
+#' \donttest{ 
 #' print('See add_balance_table for full example')
 #' }
 #' 
@@ -348,7 +348,7 @@ make_output <- function(scored_data, data, matches,
 #' @param matches Dataframe containing the matches from comparison_pool
 #' 
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data(package="rollmatch", "rem_synthdata_small")
 #' reduced_data <- reduce_data(data = rem_synthdata_small, treat = "treat",
 #'                             tm = "quarter", entry = "entry_q",
