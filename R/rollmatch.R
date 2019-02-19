@@ -1,6 +1,6 @@
 #' Rolling entry matching
 #'
-#' \code{rollmatch} is the last of 3 main function in the rollmatch package
+#' \code{rollmatch} is the last of 3 main functions in the rollmatch package
 #' \emph{<rollmatch>} implements a comparison group selection
 #' methodology for interventions with rolling participant entry over time.
 #' A difficulty in evaluating rolling entry interventions is that a suitable

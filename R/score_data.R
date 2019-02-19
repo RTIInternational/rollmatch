@@ -1,4 +1,4 @@
-#' Run a logistic or probit model
+#' Create propensity scores using a logistic or probit regression model 
 #'
 #' @param model_type Use logistic regression ("logistic") or "probit"
 #' regression ("probit") to estimate the predicted probability of participating
