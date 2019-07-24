@@ -18,6 +18,7 @@ This method, called Rolling Entry Matching, assigns potential comparison non-par
 ### Video
 
 [![Watch the Intro Video](https://img.youtube.com/vi/_U1bDrL_f-M/0.jpg)](https://www.youtube.com/watch?v=_U1bDrL_f-M)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FRTIInternational%2Frollmatch.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FRTIInternational%2Frollmatch?ref=badge_shield)
 
 ### Installation
 
@@ -66,3 +67,7 @@ output
 ```
 
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FRTIInternational%2Frollmatch.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FRTIInternational%2Frollmatch?ref=badge_large)
