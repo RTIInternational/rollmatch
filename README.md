@@ -14,6 +14,7 @@ This method, called Rolling Entry Matching, assigns potential comparison non-par
 
 #### References
 * For more details on Rolling Entry Matching, please reference [Witman et al. 2018](https://onlinelibrary.wiley.com/doi/abs/10.1111/1475-6773.13086).
+* For more details on the `rollmatch` R package, please reference [Jones et al. 2019](https://journal.r-project.org/archive/2019/RJ-2019-005/index.html).
 
 ### Video
 
