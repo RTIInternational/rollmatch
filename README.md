@@ -10,7 +10,7 @@ rollmatch <img src="man/figures/200px-Rti-logo.png" align="right" />
 * A small number of entrants in a period can hinder propensity score models
 * Precipitating events prior to entry may be hard to pin down, but generate changes in dynamic variables (e.g., utilization, spending)
 
-This method, called Rolling Entry Matching, assigns potential comparison non-participants multiple counterfactual entry periods which allows for matching of participant and non-participants based on data immediately preceding each participant's specific entry period, rather than using data from a fixed pre-intervention period.
+This method, called Rolling Entry Matching, assigns potential comparison non-participants multiple counterfactual entry periods which allows for matching of participant and non-participants based on data immediately preceding each participant's specific entry period, rather than using data from a fixed pre-intervention period. 
 
 #### References
 * For more details on Rolling Entry Matching, please reference [Witman et al. 2018](https://onlinelibrary.wiley.com/doi/abs/10.1111/1475-6773.13086).
