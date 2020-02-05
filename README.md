@@ -49,7 +49,7 @@ reduced_data <- reduce_data(data = rem_synthdata_small, treat = "treat",
 fm <- as.formula(treat ~ qtr_pmt + yr_pmt + age)
 vars <- all.vars(fm)
 
-# Calculate propensity socres for the reduced data
+# Calculate propensity scores for the reduced data
 scored_data <- score_data(reduced_data = reduced_data,
                           model_type = "logistic", match_on = "logit",
                           fm = fm, treat = "treat",
