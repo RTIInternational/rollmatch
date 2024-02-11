@@ -2,7 +2,7 @@
 % Please edit documentation in R/score_data.R
 \name{score_data}
 \alias{score_data}
-\title{Run a logistic or probit model}
+\title{Create propensity scores using a logistic or probit regression model}
 \usage{
 score_data(reduced_data, model_type, match_on, fm, treat, tm, entry, id)
 }
@@ -35,7 +35,7 @@ enrolled in the intervention (in the same units as the tm variable).}
 A copy of reduced_data input with added propensity scores
 }
 \description{
-Run a logistic or probit model
+Create propensity scores using a logistic or probit regression model
 }
 \examples{
 \dontrun{

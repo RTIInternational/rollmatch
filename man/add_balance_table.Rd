@@ -4,8 +4,7 @@
 \alias{add_balance_table}
 \title{Add the balancing table to the final output}
 \usage{
-add_balance_table(scored_data, vars, tm, id, combined_output, treat,
-  matches)
+add_balance_table(scored_data, vars, tm, id, combined_output, treat, matches)
 }
 \arguments{
 \item{scored_data}{The dataframe from score_data()}

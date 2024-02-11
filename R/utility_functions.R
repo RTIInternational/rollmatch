@@ -72,7 +72,7 @@ compare_pool <- function(scored_data, treat, tm, entry, id){
 #' @param scored_data Dataframe of results from score_data()
 #' @param treat See rollmatch()
 #' @param tm See rollmatch()
-#' @param standard_deviaion See rollmatch()
+#' @param standard_deviation See rollmatch()
 #' 
 #' @examples
 #' \donttest{ 
@@ -241,16 +241,25 @@ create_matches <- function(trimmed_pool, tm, num_matches = 3,
 }
 
 
-#' Create additional columns for the matches dataset
+#' Create Additional Columns for the Matches Dataset
 #'
-#' @param Matches Dataframe containing the matches from comparison_pool
+#' This function takes a dataframe containing match information and adds
+#' additional columns to indicate the match rank, total matches for a given
+#' treatment ID, treatment weight, control matches, and control weight.
+#'
+#' @param matches Dataframe containing the matches from comparison_pool. Each
+#'        row represents a match, and there should be columns for `treat_id`
+#'        and possibly `control_id` if control matches are to be calculated.
+
+#' @return A dataframe containing the original match information along with
+#'         additional columns: `match_rank`, `total_matches`, `treatment_weight`,
+#'         `control_matches`, and `control_weight`.
 #' 
 #' @examples
 #' \donttest{ 
 #' print('See add_balance_table for full example')
 #' }
 #'
-#' @return Dataframe containing top matches
 #' @keywords internal
 add_matches_columns <- function(matches){
   control_id <- ""; treatment_weight <- "";
@@ -348,7 +357,7 @@ make_output <- function(scored_data, data, matches,
 #' @param matches Dataframe containing the matches from comparison_pool
 #' 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' data(package="rollmatch", "rem_synthdata_small")
 #' reduced_data <- reduce_data(data = rem_synthdata_small, treat = "treat",
 #'                             tm = "quarter", entry = "entry_q",

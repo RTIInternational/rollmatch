@@ -1,10 +1,10 @@
 Package: rollmatch
 Title: Rolling Entry Matching
-Version: 2.0.2
-Date: 2020-06-01
+Version: 2.0.3
+Date: 2024-02-11
 Author: Rob Chew [aut, cre], Kasey Jones [aut, cre], Mahin Manley [aut], Allison Witman [res], Chris Beadles [res], Yiyan Liu [res], Ann Larson [res]
 Maintainer: Rob Chew <rchew@rti.org>
-Description: Functions to perform propensity score matching on rolling entry interventions for which a suitable "entry" date is not observed for nonparticipants. For more details, please reference Witman et al. (2018) <https://onlinelibrary.wiley.com/doi/abs/10.1111/1475-6773.13086>.
+Description: Functions to perform propensity score matching on rolling entry interventions for which a suitable "entry" date is not observed for nonparticipants. For more details, please reference Witman et al. (2018) <doi:10.1111/1475-6773.13086>.
 License: MIT + file LICENSE
 URL: https://github.com/RTIInternational/rollmatch
 LazyData: true
@@ -16,4 +16,4 @@ Imports:
     stats
 Suggests:
     testthat (>= 1.0.2)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.2.0

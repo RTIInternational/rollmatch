@@ -4,7 +4,8 @@
 \name{rem_synthdata_small}
 \alias{rem_synthdata_small}
 \title{Synthetic dataset to illustrate rolling entry (small)}
-\format{A data frame with 12,720 observations and 20 variables:
+\format{
+A data frame with 12,720 observations and 20 variables:
 \describe{
    \item{indiv_id}{The unique identifier for each individual.}
    \item{entry_q}{The period in which the individual enrolled in treatment / entered the intervention.}
@@ -26,7 +27,8 @@
    \item{chron_num}{Number of chronic conditions.}
    \item{qtr_pmt}{Payments during the quarter.}
    \item{yr_pmt}{Payments during the previous 4 quarters.}
-}}
+}
+}
 \usage{
 rem_synthdata_small
 }

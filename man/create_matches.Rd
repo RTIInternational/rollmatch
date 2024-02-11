@@ -23,7 +23,7 @@ Dataframe containing top matches
 Algorithm to find best matches from the comparison pool
 }
 \examples{
-\dontrun{ 
+\donttest{ 
 print('See add_balance_table for full example')
 }
 

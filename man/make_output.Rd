@@ -28,7 +28,7 @@ make_output(scored_data, data, matches, treat, tm, entry, id, lookback)
 Combine the results of rollmatch into a tidy list for output
 }
 \examples{
-\dontrun{ 
+\donttest{ 
 print('See add_balance_table for full example')
 }
 

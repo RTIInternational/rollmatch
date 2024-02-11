@@ -57,12 +57,9 @@ run_checks_one <- function(data, treat, tm, entry, id){
 #' Run checks on variable inputs 
 #'
 #' @param data See rollmatch()
-#' @param lookback See rollmatch()
 #' @param alpha See rollmatch()
-#' @param standard_deviaion See rollmatch()
+#' @param standard_deviation See rollmatch()
 #' @param num_matches See rollmatch()
-#' @param match_on See score_data()
-#' @param model_type See score_data()
 #' @param replacement See rollmatch()
 #' 
 #' @keywords internal
