@@ -2,21 +2,27 @@
 % Please edit documentation in R/utility_functions.R
 \name{add_matches_columns}
 \alias{add_matches_columns}
-\title{Create additional columns for the matches dataset}
+\title{Create Additional Columns for the Matches Dataset}
 \usage{
 add_matches_columns(matches)
 }
 \arguments{
-\item{Matches}{Dataframe containing the matches from comparison_pool}
+\item{matches}{Dataframe containing the matches from comparison_pool. Each
+row represents a match, and there should be columns for `treat_id`
+and possibly `control_id` if control matches are to be calculated.}
 }
 \value{
-Dataframe containing top matches
+A dataframe containing the original match information along with
+        additional columns: `match_rank`, `total_matches`, `treatment_weight`,
+        `control_matches`, and `control_weight`.
 }
 \description{
-Create additional columns for the matches dataset
+This function takes a dataframe containing match information and adds
+additional columns to indicate the match rank, total matches for a given
+treatment ID, treatment weight, control matches, and control weight.
 }
 \examples{
-\dontrun{ 
+\donttest{ 
 print('See add_balance_table for full example')
 }
 

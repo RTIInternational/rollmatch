@@ -11,17 +11,11 @@ run_checks_two(data, alpha, standard_deviation, num_matches, replacement)
 
 \item{alpha}{See rollmatch()}
 
+\item{standard_deviation}{See rollmatch()}
+
 \item{num_matches}{See rollmatch()}
 
 \item{replacement}{See rollmatch()}
-
-\item{lookback}{See rollmatch()}
-
-\item{standard_deviaion}{See rollmatch()}
-
-\item{match_on}{See score_data()}
-
-\item{model_type}{See score_data()}
 }
 \description{
 Run checks on variable inputs

@@ -4,9 +4,20 @@
 \alias{rollmatch}
 \title{Rolling entry matching}
 \usage{
-rollmatch(scored_data, data, treat, tm, entry, id, vars, lookback,
-  alpha = 0, standard_deviation = "average", num_matches = 3,
-  replacement = TRUE)
+rollmatch(
+  scored_data,
+  data,
+  treat,
+  tm,
+  entry,
+  id,
+  vars,
+  lookback,
+  alpha = 0,
+  standard_deviation = "average",
+  num_matches = 3,
+  replacement = TRUE
+)
 }
 \arguments{
 \item{scored_data}{Output from scored_data() or the output from
@@ -66,7 +77,7 @@ treatment, and matched comparison group means and standard deviations for
 the variables used in the model.}
 }
 \description{
-\code{rollmatch} is the last of 3 main function in the rollmatch package
+\code{rollmatch} is the last of 3 main functions in the rollmatch package
 \emph{<rollmatch>} implements a comparison group selection
 methodology for interventions with rolling participant entry over time.
 A difficulty in evaluating rolling entry interventions is that a suitable
@@ -92,7 +103,7 @@ that have the same "entry period" into the intervention
 probability of treatment is obtained for participants and non-participants
 (e.g. through propensity score matching). The user can use function
 "score_data" to complete this step, or create use their own propensity score 
-calculation.
+calculation. 
 
 The final step consists of the matching algorithm. The algorithm selects
 the best matched comparison(s) for each participant from the pool of

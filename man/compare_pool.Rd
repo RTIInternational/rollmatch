@@ -22,7 +22,7 @@ Dataframe comparing all treatment and control data
 Create a dataframe of comparisons between all treatment and control data.
 }
 \examples{
-\dontrun{ 
+\donttest{ 
 print('See add_balance_table for full example')
 }
 

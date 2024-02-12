@@ -1,7 +1,7 @@
 ## Test environments
-* local OS X install (10.12 "Sierra"), R 3.6.2
-* ubuntu 14.04, on travis-ci (release & devel) 
+* local OS X install (13.6 "Ventura"), R 4.1.2
 * win-builder (devel)
+* r-hub (window, linux)
 
 ## R CMD check results
 There were no `ERRORs` when run locally on OS X or on win-builder

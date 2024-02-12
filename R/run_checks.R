@@ -14,7 +14,7 @@ run_checks_one <- function(data, treat, tm, entry, id){
     stop("'treat' parameter must be a string")
   }
   try_treat <- try(data[treat], silent = TRUE)
-  if (class(try_treat) == "try-error"){
+  if (inherits(try_treat,"try-error")){
     stop("'treat' parameter must be a column in the data.frame")
   }
 
@@ -23,7 +23,7 @@ run_checks_one <- function(data, treat, tm, entry, id){
     stop("'tm' parameter must be a string")
   }
   try_tm <- try(data[tm], silent = TRUE)
-  if (class(try_tm) == "try-error"){
+  if (inherits(try_tm,"try-error")){
     stop("'tm' parameter must be a column in the data.frame")
   } else if (all(data[tm] == floor(data[tm])) == FALSE){
     stop("'tm' variable must resolve to vector of whole numbers")
@@ -36,7 +36,7 @@ run_checks_one <- function(data, treat, tm, entry, id){
     stop("'entry' parameter must be a string")
   }
   try_entry <- try(data[entry], silent = TRUE)
-  if (class(try_entry) == "try-error"){
+  if (inherits(try_entry,"try-error")){
     stop("'entry' parameter must be a column in the data.frame")
   } else if (all(data[entry] == floor(data[entry])) == FALSE){
     stop("'entry' variable must resolve to vector of whole numbers")
@@ -49,7 +49,7 @@ run_checks_one <- function(data, treat, tm, entry, id){
     stop("'id' parameter must be a string")
   }
   try_id <- try(data[id], silent = TRUE)
-  if (class(try_id) == "try-error"){
+  if (inherits(try_id,"try-error")){
     stop("'id' parameter must be a column in the data.frame")
   }
 }
@@ -57,12 +57,9 @@ run_checks_one <- function(data, treat, tm, entry, id){
 #' Run checks on variable inputs 
 #'
 #' @param data See rollmatch()
-#' @param lookback See rollmatch()
 #' @param alpha See rollmatch()
-#' @param standard_deviaion See rollmatch()
+#' @param standard_deviation See rollmatch()
 #' @param num_matches See rollmatch()
-#' @param match_on See score_data()
-#' @param model_type See score_data()
 #' @param replacement See rollmatch()
 #' 
 #' @keywords internal

@@ -4,8 +4,14 @@
 \alias{trim_pool}
 \title{Use a caliper to trim the data to only observations within threshold}
 \usage{
-trim_pool(alpha, comparison_pool, scored_data, treat, tm,
-  standard_deviation = "average")
+trim_pool(
+  alpha,
+  comparison_pool,
+  scored_data,
+  treat,
+  tm,
+  standard_deviation = "average"
+)
 }
 \arguments{
 \item{alpha}{See rollmatch()}
@@ -19,7 +25,7 @@ compare_pool()}
 
 \item{tm}{See rollmatch()}
 
-\item{standard_deviaion}{See rollmatch()}
+\item{standard_deviation}{See rollmatch()}
 }
 \value{
 Dataframe of the trimmed comparisons based on the alpha value
@@ -28,7 +34,7 @@ Dataframe of the trimmed comparisons based on the alpha value
 Use a caliper to trim the data to only observations within threshold
 }
 \examples{
-\dontrun{ 
+\donttest{ 
 print('See add_balance_table for full example')
 }
                          
