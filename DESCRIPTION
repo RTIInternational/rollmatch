@@ -2,8 +2,15 @@ Package: rollmatch
 Title: Rolling Entry Matching
 Version: 2.0.3
 Date: 2024-02-11
-Author: Rob Chew [aut, cre], Kasey Jones [aut, cre], Mahin Manley [aut], Allison Witman [res], Chris Beadles [res], Yiyan Liu [res], Ann Larson [res]
-Maintainer: Rob Chew <rchew@rti.org>
+Authors@R: c(
+    person("Rob", "Chew", role = c("aut", "cre"), email = "rchew@rti.org"),
+    person("Kasey", "Jones", role = "aut"),
+    person("Mahin", "Manley", role = "aut"),
+    person("Allison", "Witman", role = "res"),
+    person("Chris", "Beadles", role = "res"),
+    person("Yiyan", "Liu", role = "res"),
+    person("Ann", "Larson", role = "res")
+)
 Description: Functions to perform propensity score matching on rolling entry interventions for which a suitable "entry" date is not observed for nonparticipants. For more details, please reference Witman et al. (2018) <doi:10.1111/1475-6773.13086>.
 License: MIT + file LICENSE
 URL: https://github.com/RTIInternational/rollmatch
