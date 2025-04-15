@@ -1,7 +1,7 @@
 Package: rollmatch
 Title: Rolling Entry Matching
-Version: 2.0.3
-Date: 2024-02-11
+Version: 2.0.4
+Date: 2025-04-15
 Authors@R: c(
     person("Rob", "Chew", role = c("aut", "cre"), email = "rchew@rti.org"),
     person("Kasey", "Jones", role = "aut"),
